@@ -13,13 +13,36 @@ CSS Structure notes and Plan
 
 # .film-mod class for the Yuki no Hana module on Home page and bottom of other pages.
 
-*/
+/* --- FONTS --- */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700');
+
+/* MINI-STYLESHEET
+Bright green = #77ff4e
+Dark green (text on button) = #30661f
+Gray = #94989A */
 
 /* ----- General ----- */
+body {
+  font-family: 'Roboto', sans-serif;
+}
 
 /* ----- Nav ----- */
 
+.logo {
+
+}
+
 /* ----- Home header ----- */
+
+header.home {
+  background: url("../img/header.png");
+  min-height: 90vh;
+}
+
+header.home h1, .home span, .home p {
+  color: white;
+
+}
 
 /* ----- Footer ----- */
 
@@ -28,3 +51,14 @@ CSS Structure notes and Plan
 /* ----- Grid List ----- */
 
 /* ----- Modules ----- */
+
+/* ----- Custom Buttons ----- */
+
+header .green-btn {
+  background: #77ff4e;
+  color: #30661f;
+  font-weight: bold;
+  font-family: 'Roboto Condensed', sans-serif;
+
+  padding: 15px 35px;
+}
