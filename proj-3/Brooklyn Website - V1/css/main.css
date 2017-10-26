@@ -24,19 +24,33 @@ Gray = #94989A */
 /* ----- General ----- */
 body {
   font-family: 'Roboto', sans-serif;
+  color: #94989A;
 }
 
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 600;
+  color: #94989A;
+}
+
+section h1 {
+  text-align: center;
+  margin: 60px 0 15px 0;
+}
 /* ----- Nav ----- */
 
-.logo {
-
-}
 
 /* ----- Home header ----- */
 
 header.home {
   background: url("../img/header.png");
-  height: 625px;
+  /*padding-bottom: 60px; - for mobile size*/
+  min-height: 630px;
+
 }
 
 header.home h1, .home span, .home p {
@@ -49,6 +63,16 @@ header .trailer {
   margin: 20% 0;
 }
 
+/* ----- Showings section ----- */
+
+section.showings {
+  margin-bottom: 30px;
+}
+section.showings h2 {
+  padding: 15px 0 5px;
+}
+
+
 /* ----- Footer ----- */
 
 /* ----- Other Page Header----- */
@@ -59,11 +83,33 @@ header .trailer {
 
 /* ----- Custom Buttons ----- */
 
-header .green-btn {
+/* Green button */
+.green-btn {
   background: #77ff4e;
   color: #30661f;
   font-weight: bold;
   font-family: 'Roboto Condensed', sans-serif;
 
   padding: 15px 35px;
+}
+
+/* Gray button */
+.gray-btn {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #94989A;
+  background: rgba(0,0,0,0);
+  border: solid 5px #94989A;
+  padding: 5px 10px;
+  float: right;
+  transition: background .5s;
+  transition: color .5s;
+  transition: border .5s;
+
+}
+
+.gray-btn:hover {
+  background: #77ff4e;
+  color: #30661f;
+  border: solid 5px #30661f;
+  text-decoration: none;
 }
