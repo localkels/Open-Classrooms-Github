@@ -36,12 +36,17 @@ body {
 
 header.home {
   background: url("../img/header.png");
-  min-height: 90vh;
+  height: 625px;
 }
 
 header.home h1, .home span, .home p {
   color: white;
 
+}
+
+header .trailer {
+  max-width: 100%;
+  margin: 20% 0;
 }
 
 /* ----- Footer ----- */
