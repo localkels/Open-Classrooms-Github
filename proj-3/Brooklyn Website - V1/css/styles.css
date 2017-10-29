@@ -43,6 +43,21 @@ section h1 {
   width: 200px; }
 
 /* ----- Nav ----- */
+nav {
+  background: black;
+  margin: 0;
+  font-family: "Roboto", sans-serif; }
+  nav ul.right {
+    margin: 0;
+    padding: 0 15px;
+    list-style: none;
+    float: right; }
+    nav ul.right li {
+      display: inline-block;
+      padding: 0 10px; }
+      nav ul.right li a {
+        color: white; }
+
 /* ----- Home header ----- */
 header.home {
   background: url("../img/header.png");

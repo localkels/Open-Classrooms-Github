@@ -16,6 +16,7 @@ CSS Structure notes and Plan
 /* --- FONTS --- */
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700');
 
+
 /* MINI-STYLESHEET
 Bright green = #77ff4e
 Dark green (text on button) = #30661f
@@ -25,6 +26,9 @@ $brightgreen: #77ff4e;
 $darkgreen: #30661f;
 $gray: #94989A;
 $darkgray: #7A7D7F;
+
+$RobotoCon: 'Roboto Condensed', sans-serif;
+$Roboto: 'Roboto', sans-serif;
 
 
 
@@ -57,6 +61,28 @@ section h1 {
 
 }
 /* ----- Nav ----- */
+
+nav {
+  background: black;
+  margin:0;
+  font-family: $Roboto;
+
+  ul.right {
+    margin: 0;
+    padding: 0 15px;
+    list-style: none;
+    float: right;
+
+    li {
+      display: inline-block;
+      padding: 0 10px;
+
+      a {
+        color: white;
+      }
+    }
+  }
+}
 
 
 /* ----- Home header ----- */
