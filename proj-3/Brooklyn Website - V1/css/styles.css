@@ -123,15 +123,23 @@ section.about .right p {
 footer {
   background: #000;
   margin-top: 60px;
-  padding: 60px 0; }
-
-footer li {
-  display: inline-block;
-  margin: 0 15px; }
-
-footer ul {
-  margin: 15px auto;
-  text-align: center; }
+  padding: 60px 0;
+  font-size: 0.8em; }
+  footer span {
+    font-weight: bold;
+    font-size: 1.2em; }
+  footer ul {
+    font-size: 0.8em;
+    margin: 15px auto;
+    text-align: right; }
+  footer li {
+    margin: 0 15px;
+    list-style: none; }
+    footer li a {
+      color: #94989A; }
+    footer li a:hover {
+      color: #77ff4e;
+      text-decoration: none; }
 
 /* ----- Other Page Header----- */
 /* ----- Grid List ----- */
