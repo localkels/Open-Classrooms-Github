@@ -2,6 +2,10 @@
 No media query since this is the default in Bootstrap */
 /* Small devices (landscape phones, 576px and up) */
 /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .form-card {
+    padding: 60px; } }
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   /* Nav links float right */ }
