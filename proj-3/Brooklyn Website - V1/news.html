@@ -84,7 +84,7 @@
         <h2>The Slums of the World - Coming soon</h2>
         <small><h6>Karen Gross |  November 25th, 2017</h6></small>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a class="gray-btn" href="#">Read more</a>
+        <a class="gray-btn" href="post.html">Read more</a>
       </div>
     </div>
     <div class="row">
@@ -95,7 +95,7 @@
         <h2>2018 Venue: to be announced soon</h2>
         <small><h6>Karen Gross |  September 10th, 2017</h6></small>
         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a class="gray-btn" href="#">Read more</a>
+        <a class="gray-btn" href="post.html">Read more</a>
       </div>
     </div>
     <div class="row">
@@ -106,7 +106,7 @@
         <h2>"For my People" – Director's Reflection</h2>
         <small><h6>Sarah McLaughlin | August 20th, 2017</h6></small>
         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a class="gray-btn" href="#">Read more</a>
+        <a class="gray-btn" href="post.html">Read more</a>
       </div>
     </div>
     <div class="row">
@@ -117,7 +117,7 @@
         <h2>Expedition: Zambia </h2>
         <small><h6>Mark Garrant | September 5th, 2017</h6></small>
         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a class="gray-btn" href="#">Read more</a>
+        <a class="gray-btn" href="post.html">Read more</a>
       </div>
     </div>
 
@@ -150,28 +150,43 @@
 
   <section>
 
-    <h1 class="green-h1">Preregister</h1>
+    <h1 class="green-h1">Pre-register</h1>
     <div class="form-container">
-      <form class="" action="index.html" method="post">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="first-name">First Name</label>
+            <input type="text" class="form-control" id="first-name" placeholder="Johnathan">
+          </div>
 
-        <p>
-          <label for="Name">Full Name</label>
-          <input type="text" name="Name" value="John Doe">
-        </p>
+          <div class="form-group col-md-6">
+            <label for="last-name">Last Name</label>
+            <input type="password" class="form-control" id="last-name" placeholder="Doe">
+          </div>
+        </div>
+
+        <div class="form-row">
+
+          <div class="form-group col-md-12">
+            <label for="user-email">Email Address</label>
+            <input type="email" class="form-control" id="user-email" placeholder="johnathan@doe.com">
+          </div>
+
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-9">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="Brooklyn">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="user-age">Age</label>
+            <input type="text" class="form-control" id="user-age" placeholder="23">
+          </div>
+        </div>
 
 
-        <p>
-          <label for="City">City</label>
-          <input type="text" name="City" value="Brooklyn">
-        </p>
-
-        <p>
-          <label for="email">Email</label>
-          <input type="email" name="email" value="johndoe@doe.com">
-        </p>
-
-        <input type="submit" name="Submit" value="Submit">
-
+        <button type="submit" class="btn btn-danger">Pre-register now</button>
       </form>
 
     </div>
