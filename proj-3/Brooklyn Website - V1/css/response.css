@@ -7,10 +7,14 @@ No media query since this is the default in Bootstrap */
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  nav i.hamburger {
-    display: none; }
-  nav ul {
-    display: inline-block; }
+  nav {
+    position: fixed; }
+    nav i.hamburger {
+      display: none; }
+    nav ul {
+      display: inline-block; }
+  header .trailer {
+    margin: 120px 0 105px; }
   .form-card {
     padding: 60px; } }
 

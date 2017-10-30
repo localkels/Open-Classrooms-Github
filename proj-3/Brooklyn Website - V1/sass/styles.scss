@@ -69,7 +69,7 @@ nav {
   font-family: $Roboto;
   font-size: 0.8em;
   width: 100%;
-  position: fixed;
+  position: absolute;
   top: 0px;
   z-index: 100;
 
@@ -131,7 +131,7 @@ nav {
 header.home {
   background: url("../img/header.png");
   /*padding-bottom: 60px; - for mobile size*/
-  min-height: 630px;
+  min-height: 700px;
 
 }
 
@@ -142,9 +142,11 @@ header.home h1, .home span, .home p {
 
 header .trailer {
   max-width: 100%;
-  margin: 20% 0;
+  margin: 135px 0 30px;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
 }
+
+
 
 /* ----- Showings section (home) ----- */
 
@@ -159,17 +161,19 @@ section.showings h2 {
 
 section.about {
   color: #fff;
-  min-height: 400px;
-  margin: 60px 0;
+  margin: 60px 0 0;
   background-image: url("../img/festival.png");
   background-size: cover;
   background-position: bottom;
   /* Later: Try to get img transparent with black bg */
+
+
 }
 
 /* Important column */
 section.about .left {
   text-align: center;
+  background: rgba(0,0,0,0.5);
 }
 
 section.about .left h1 {
@@ -183,8 +187,9 @@ section.about span.green {
 }
 
 section.about .right p {
-  height: 100%;
-  margin: 15% auto;
+  margin: 10% auto;
+  padding: 15px;
+
 }
 
 /* ----- Preregister section ----- */
@@ -259,6 +264,12 @@ footer.pg-footer {
   font-family: 'Roboto Condensed', sans-serif;
 
   padding: 15px 35px;
+  transition: color .5s;
+}
+
+.green-btn:hover {
+  text-decoration: none;
+  color: #fff;
 }
 
 /* Gray button */
