@@ -26,6 +26,7 @@ $brightgreen: #77ff4e;
 $darkgreen: #30661f;
 $gray: #94989A;
 $darkgray: #7A7D7F;
+$lightgray: #F7F7F7;
 
 $RobotoCon: 'Roboto Condensed', sans-serif;
 $Roboto: 'Roboto', sans-serif;
@@ -78,6 +79,10 @@ nav {
     list-style: none;
     display: inline;
 
+    a.active {
+      color: $brightgreen;
+    }
+
 
     li {
       display: inline-block;
@@ -92,6 +97,8 @@ nav {
         text-decoration: none;
       }
     }
+
+
   }
 
 }
@@ -170,7 +177,7 @@ section.about .right p {
 
 /* ----- Footer ----- */
 
-footer {
+footer.pg-footer {
   background: #000;
   margin-top: 60px;
   padding: 60px 0;
@@ -206,6 +213,8 @@ footer {
 
 
 /* ----- Other Page Header----- */
+
+@import "showings";
 
 /* ----- Grid List ----- */
 

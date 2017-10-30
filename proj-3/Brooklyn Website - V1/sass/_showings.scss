@@ -1,0 +1,39 @@
+
+header.pg-head {
+  background: url("../img/header.png");
+  display: flex;
+
+  .pg-title {
+    color: white;
+    margin: 125px 0 105px;
+    text-align: right;
+    font-size: 1.1em;
+
+    h1 {
+      color: white;
+    }
+
+
+  }
+
+}
+
+
+
+/* ----- Grid List ----- */
+
+section.show-grid {
+  margin-top: 60px;
+
+
+  .box {
+    background: $lightgray;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gray-btn {
+    float: none;
+  }
+
+}

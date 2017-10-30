@@ -57,6 +57,8 @@ nav {
     padding: 0 0;
     list-style: none;
     display: inline; }
+    nav ul a.active {
+      color: #77ff4e; }
     nav ul li {
       display: inline-block;
       padding: 7.5px 15px; }
@@ -120,28 +122,52 @@ section.about .right p {
   margin: 0 auto; }
 
 /* ----- Footer ----- */
-footer {
+footer.pg-footer {
   background: #000;
   margin-top: 60px;
   padding: 60px 0;
   font-size: 0.8em; }
-  footer span {
+  footer.pg-footer span {
     font-weight: bold;
     font-size: 1.2em; }
-  footer ul {
+  footer.pg-footer ul {
     font-size: 0.8em;
     margin: 15px auto;
     text-align: right; }
-  footer li {
+  footer.pg-footer li {
     margin: 0 15px;
     list-style: none; }
-    footer li a {
+    footer.pg-footer li a {
       color: #94989A; }
-    footer li a:hover {
+    footer.pg-footer li a:hover {
       color: #77ff4e;
       text-decoration: none; }
 
 /* ----- Other Page Header----- */
+header.pg-head {
+  background: url("../img/header.png");
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  header.pg-head .pg-title {
+    color: white;
+    margin: 125px 0 105px;
+    text-align: right;
+    font-size: 1.1em; }
+    header.pg-head .pg-title h1 {
+      color: white; }
+
+/* ----- Grid List ----- */
+section.show-grid {
+  margin-top: 60px; }
+  section.show-grid .box {
+    background: #F7F7F7;
+    margin: 0;
+    padding: 0; }
+  section.show-grid .gray-btn {
+    float: none; }
+
 /* ----- Grid List ----- */
 /* ----- Modules ----- */
 /* ----- Custom Buttons ----- */
