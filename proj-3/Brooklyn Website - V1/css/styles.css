@@ -168,7 +168,7 @@ header.pg-head {
     margin: 125px 0 105px;
     text-align: right;
     font-size: 1.1em; }
-    header.pg-head .pg-title h1 {
+    header.pg-head .pg-title h1, header.pg-head .pg-title h2, header.pg-head .pg-title h3, header.pg-head .pg-title h4, header.pg-head .pg-title h5 {
       color: white; }
 
 /* ----- Grid List ----- */
@@ -210,6 +210,9 @@ body.bg-img {
 /* ----- News page ----- */
 .news-pg .main div {
   margin: 15px 0; }
+
+.news-pg .left-col {
+  text-align: right; }
 
 /* ----- Modules ----- */
 /* ----- Custom Buttons ----- */
