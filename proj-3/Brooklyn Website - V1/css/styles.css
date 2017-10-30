@@ -149,7 +149,8 @@ header.pg-head {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+  margin-bottom: 60px; }
   header.pg-head .pg-title {
     color: white;
     margin: 125px 0 105px;
@@ -193,6 +194,10 @@ body.bg-img {
 
 .about-pg .row img {
   margin: 5px 0; }
+
+/* ----- News page ----- */
+.news-pg .main div {
+  margin: 15px 0; }
 
 /* ----- Modules ----- */
 /* ----- Custom Buttons ----- */
