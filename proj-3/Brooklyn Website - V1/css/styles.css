@@ -184,6 +184,16 @@ body.bg-img {
   .form-card hr {
     margin: 30px 0; }
 
+/* ----- About page ----- */
+.about-pg header.pg-head {
+  background: url("../img/festival.png");
+  background-position: bottom;
+  background-size: cover;
+  margin-bottom: 60px; }
+
+.about-pg .row img {
+  margin: 5px 0; }
+
 /* ----- Modules ----- */
 /* ----- Custom Buttons ----- */
 /* Green button */
