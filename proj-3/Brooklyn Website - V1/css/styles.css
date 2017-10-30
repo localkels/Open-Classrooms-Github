@@ -169,6 +169,17 @@ section.show-grid {
     float: none; }
 
 /* ----- Preregister page ----- */
+body.bg-img {
+  background: url("../img/header.png"); }
+
+.form-card {
+  margin: 90px auto;
+  padding: 30px;
+  max-width: 720px;
+  background-color: #F7F7F7;
+  -webkit-box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6); }
+
 /* ----- Modules ----- */
 /* ----- Custom Buttons ----- */
 /* Green button */
