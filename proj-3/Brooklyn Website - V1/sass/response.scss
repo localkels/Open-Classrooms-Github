@@ -12,6 +12,18 @@ No media query since this is the default in Bootstrap */
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+
+  nav {
+
+    i.hamburger {
+      display: none;
+    }
+
+    ul {
+      display: inline-block;
+    }
+  }
+
   .form-card {
     padding: 60px;
   }
@@ -21,7 +33,11 @@ No media query since this is the default in Bootstrap */
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 
-  /* Nav links float right */
+  nav {
+    li {
+      padding: 7.5px 30px;
+    }
+  }
 
 }
 
