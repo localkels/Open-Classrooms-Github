@@ -9,4 +9,12 @@ body.bg-img {
   background-color: $lightgray;
   box-shadow: 5px 5px 50px rgba(0,0,0,0.6);
 
+  h1 {
+    margin-bottom: 15px;
+  }
+
+  hr {
+    margin: 30px 0;
+  }
+
 }
