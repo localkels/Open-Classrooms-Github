@@ -58,9 +58,11 @@ section h1 {
 .green-h1 {
   border-bottom: #77ff4e solid 5px;
   padding-bottom: 5px;
-  width: 200px;
+  width: 150px;
+  margin: 0 auto 30px;
 
 }
+
 /* ----- Nav ----- */
 
 nav {
@@ -96,7 +98,6 @@ nav {
     float: right;
     display: hidden;
 
-
     a.active {
       color: $brightgreen;
     }
@@ -131,7 +132,7 @@ nav {
 header.home {
   background: url("../img/header.png");
   /*padding-bottom: 60px; - for mobile size*/
-  min-height: 700px;
+  // min-height: 700px;
 
 }
 
@@ -141,9 +142,18 @@ header.home h1, .home span, .home p {
 }
 
 header .trailer {
-  max-width: 100%;
-  margin: 135px 0 30px;
+  // margin: 135px 0 30px;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+}
+
+header {
+  .head-text {
+    // margin: 200px 0 0;
+  }
+
+  #row {
+    min-height: 800px;
+  }
 }
 
 
@@ -157,6 +167,12 @@ section.showings h2 {
   padding: 15px 0 5px;
 }
 
+.btn-right {
+  float: right;
+  display: inline-block;
+}
+
+
 /* ----- About section (home) ----- */
 
 section.about {
@@ -165,6 +181,8 @@ section.about {
   background-image: url("../img/festival.png");
   background-size: cover;
   background-position: bottom;
+
+  
   /* Later: Try to get img transparent with black bg */
 
 
@@ -279,7 +297,11 @@ footer.pg-footer {
   background: rgba(0,0,0,0);
   border: solid 5px $gray;
   padding: 5px 10px;
+  // display: block;
   float: right;
+  // text-align: right;
+  // max-width: 120px;
+  // text-align: center;
   box-shadow: none;
   transition: background .5s;
   transition: color .5s;
@@ -293,4 +315,26 @@ footer.pg-footer {
   border: solid 5px #77ff4e;
   text-decoration: none;
   box-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+
+}
+
+
+/* Row center fix thing */
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.row > [class*='col-'] img {
+  align-self: center;
 }

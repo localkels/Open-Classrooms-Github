@@ -3,7 +3,9 @@ No media query since this is the default in Bootstrap */
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .form-container {
-    margin: 0 auto; } }
+    margin: 0 auto; }
+  header .home {
+    max-height: 400px; } }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
