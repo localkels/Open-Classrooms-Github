@@ -119,9 +119,11 @@ section.about {
 /* Important column */
 section.about .left {
   text-align: center;
-  background: rgba(0, 0, 0, 0.5); }
+  background: rgba(0, 0, 0, 0.5);
+  padding: 60px 15px; }
 
 section.about .left h1 {
+  margin: 0;
   color: #fff; }
 
 section.about span.green {
@@ -130,7 +132,6 @@ section.about span.green {
   font-size: 1.8em; }
 
 section.about .right p {
-  margin: 10% auto;
   padding: 15px; }
 
 /* ----- Preregister section ----- */
