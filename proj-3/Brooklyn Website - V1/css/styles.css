@@ -1,24 +1,69 @@
-/*
+/* MINI-STYLESHEET */
+/***** IMPORTS *****/
+/*  Upcoming Showings Page */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700");
+header.pg-head {
+  background: url("../img/header.png");
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 60px; }
+  header.pg-head .pg-title {
+    color: white;
+    margin: 125px 0 105px;
+    text-align: right;
+    font-size: 1.1em; }
+    header.pg-head .pg-title h1, header.pg-head .pg-title h2, header.pg-head .pg-title h3, header.pg-head .pg-title h4, header.pg-head .pg-title h5 {
+      color: white; }
 
-CSS Structure notes and Plan
+/* ----- Grid List ----- */
+section.show-grid {
+  margin-top: 60px; }
+  section.show-grid .box {
+    background: #F7F7F7;
+    margin: 0;
+    padding: 0; }
+  section.show-grid .gray-btn {
+    float: none; }
 
-# .grid-list/.grid-box class for grid boxes
-# .hgreen class for headers with green line underneath
-# Make my own .graybtn and .greenbtn
-# Make .tall, .small, .medium classes for images
+/*  Preregister page  */
+body.bg-img {
+  background: url("../img/header.png"); }
 
-# Have a special size for images inside of a .grid-list box
+.form-card {
+  margin: 90px auto;
+  padding: 30px;
+  max-width: 720px;
+  background-color: #F7F7F7;
+  -webkit-box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6); }
+  .form-card h1 {
+    margin-bottom: 15px; }
+  .form-card hr {
+    margin: 30px 0; }
 
-# .about-mod class for the About module on Home page and bottom of other pages.
+/*  About page  */
+.about-pg header.pg-head {
+  background: url("../img/festival.png");
+  background-position: bottom;
+  background-size: cover;
+  margin-bottom: 60px; }
 
-# .film-mod class for the Yuki no Hana module on Home page and bottom of other pages.
+.about-pg .row img {
+  margin: 5px 0; }
+
+.about-pg .right p {
+  background: rgba(0, 0, 0, 0.3); }
+
+/*  News page  */
+.news-pg .main div {
+  margin: 15px 0; }
+
+.news-pg .left-col {
+  text-align: right; }
 
 /* --- FONTS --- */
-@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700");
-/* MINI-STYLESHEET
-Bright green = #77ff4e
-Dark green (text on button) = #30661f
-Gray = #94989A */
 /* ----- General ----- */
 body {
   font-family: 'Roboto', sans-serif;
@@ -161,69 +206,6 @@ footer.pg-footer {
       color: #77ff4e;
       text-decoration: none; }
 
-/* ----- Upcoming Showings Page----- */
-header.pg-head {
-  background: url("../img/header.png");
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 60px; }
-  header.pg-head .pg-title {
-    color: white;
-    margin: 125px 0 105px;
-    text-align: right;
-    font-size: 1.1em; }
-    header.pg-head .pg-title h1, header.pg-head .pg-title h2, header.pg-head .pg-title h3, header.pg-head .pg-title h4, header.pg-head .pg-title h5 {
-      color: white; }
-
-/* ----- Grid List ----- */
-section.show-grid {
-  margin-top: 60px; }
-  section.show-grid .box {
-    background: #F7F7F7;
-    margin: 0;
-    padding: 0; }
-  section.show-grid .gray-btn {
-    float: none; }
-
-/* ----- Preregister page ----- */
-body.bg-img {
-  background: url("../img/header.png"); }
-
-.form-card {
-  margin: 90px auto;
-  padding: 30px;
-  max-width: 720px;
-  background-color: #F7F7F7;
-  -webkit-box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6);
-  box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6); }
-  .form-card h1 {
-    margin-bottom: 15px; }
-  .form-card hr {
-    margin: 30px 0; }
-
-/* ----- About page ----- */
-.about-pg header.pg-head {
-  background: url("../img/festival.png");
-  background-position: bottom;
-  background-size: cover;
-  margin-bottom: 60px; }
-
-.about-pg .row img {
-  margin: 5px 0; }
-
-.about-pg .right p {
-  background: rgba(0, 0, 0, 0.3); }
-
-/* ----- News page ----- */
-.news-pg .main div {
-  margin: 15px 0; }
-
-.news-pg .left-col {
-  text-align: right; }
-
-/* ----- Modules ----- */
 /* ----- Custom Buttons ----- */
 /* Green button */
 .green-btn {
@@ -234,11 +216,18 @@ body.bg-img {
   padding: 15px 35px;
   -webkit-transition: color .5s;
   -o-transition: color .5s;
-  transition: color .5s; }
+  transition: color .5s;
+  -webkit-transition: -webkit-box-shadow .5s;
+  transition: -webkit-box-shadow .5s;
+  -o-transition: box-shadow .5s;
+  transition: box-shadow .5s;
+  transition: box-shadow .5s, -webkit-box-shadow .5s; }
 
 .green-btn:hover {
   text-decoration: none;
-  color: #fff; }
+  color: #fff;
+  -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6); }
 
 /* Gray button */
 .gray-btn {

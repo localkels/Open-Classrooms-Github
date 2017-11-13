@@ -1,26 +1,4 @@
-/*
-
-CSS Structure notes and Plan
-
-# .grid-list/.grid-box class for grid boxes
-# .hgreen class for headers with green line underneath
-# Make my own .graybtn and .greenbtn
-# Make .tall, .small, .medium classes for images
-
-# Have a special size for images inside of a .grid-list box
-
-# .about-mod class for the About module on Home page and bottom of other pages.
-
-# .film-mod class for the Yuki no Hana module on Home page and bottom of other pages.
-
-/* --- FONTS --- */
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700');
-
-
-/* MINI-STYLESHEET
-Bright green = #77ff4e
-Dark green (text on button) = #30661f
-Gray = #94989A */
+/* MINI-STYLESHEET */
 
 $brightgreen: #77ff4e;
 $darkgreen: #30661f;
@@ -30,6 +8,24 @@ $lightgray: #F7F7F7;
 
 $RobotoCon: 'Roboto Condensed', sans-serif;
 $Roboto: 'Roboto', sans-serif;
+
+
+/***** IMPORTS *****/
+
+/*  Upcoming Showings Page */
+@import "showings";
+
+/*  Preregister page  */
+@import "preregister";
+
+/*  About page  */
+@import "about";
+
+/*  News page  */
+@import "news";
+
+/* --- FONTS --- */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700');
 
 
 
@@ -257,20 +253,9 @@ footer.pg-footer {
 }
 
 
-/* ----- Upcoming Showings Page----- */
 
-@import "showings";
 
-/* ----- Preregister page ----- */
-@import "preregister";
 
-/* ----- About page ----- */
-@import "about";
-
-/* ----- News page ----- */
-@import "news";
-
-/* ----- Modules ----- */
 
 /* ----- Custom Buttons ----- */
 
@@ -283,11 +268,14 @@ footer.pg-footer {
 
   padding: 15px 35px;
   transition: color .5s;
+  transition: box-shadow .5s;
 }
 
 .green-btn:hover {
   text-decoration: none;
   color: #fff;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+
 }
 
 /* Gray button */
