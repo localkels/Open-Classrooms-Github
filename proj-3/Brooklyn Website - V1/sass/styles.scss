@@ -64,6 +64,7 @@ section h1 {
 nav {
   background: rgba(0,0,0,0.6);
   margin: 0;
+  // padding: 0 2vw;
   font-family: $Roboto;
   font-size: 0.8em;
   width: 100%;
@@ -71,10 +72,27 @@ nav {
   top: 0px;
   z-index: 100;
 
+  .navContainer {
+    // width: 400px;
+    padding: 0 auto;
+    overflow: auto;
+    margin: 0 auto;
+  }
+
   .logo {
     margin: 5px;
     float: left;
 
+  }
+
+  .pages {
+    float: left;
+    // margin: 0 auto;
+    // overflow: auto;
+  }
+
+  .social {
+    float: left;
   }
 
   .hamburger {
@@ -130,6 +148,8 @@ header.home {
   /*padding-bottom: 60px; - for mobile size*/
   // min-height: 700px;
 
+  padding: 150px 5px 90px;
+
 }
 
 header.home h1, .home span, .home p {
@@ -138,8 +158,9 @@ header.home h1, .home span, .home p {
 }
 
 header .trailer {
-  // margin: 135px 0 30px;
+  margin: 0 0 30px;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+
 }
 
 header {
@@ -158,6 +179,10 @@ header {
 
 section.showings {
   margin-bottom: 30px;
+
+  div {
+    margin-bottom: 15px;
+  }
 }
 section.showings h2 {
   padding: 15px 0 5px;
@@ -207,6 +232,10 @@ section.about .right p {
 }
 
 /* ----- Preregister section ----- */
+
+h1.preregister {
+  text-align: center;
+}
 
 .form-container {
   max-width: 420px;

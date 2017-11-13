@@ -4,19 +4,21 @@ No media query since this is the default in Bootstrap */
 @media (min-width: 576px) {
   .form-container {
     margin: 0 auto; }
-  header .home {
-    max-height: 400px; } }
+  header.home {
+    padding: 150px 0; } }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   nav {
     position: fixed; }
+    nav .pages {
+      float: right; }
     nav i.hamburger {
       display: none; }
     nav ul {
       display: inline-block; }
   header .trailer {
-    margin: 120px 0 105px; }
+    margin-bottom: 0; }
   .form-card {
     padding: 60px; } }
 

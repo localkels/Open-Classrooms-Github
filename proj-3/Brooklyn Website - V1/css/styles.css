@@ -32,7 +32,7 @@ body.bg-img {
   background: url("../img/header.png"); }
 
 .form-card {
-  margin: 90px auto;
+  margin: 105px auto;
   padding: 30px;
   max-width: 720px;
   background-color: #F7F7F7;
@@ -98,8 +98,16 @@ nav {
   position: absolute;
   top: 0px;
   z-index: 100; }
+  nav .navContainer {
+    padding: 0 auto;
+    overflow: auto;
+    margin: 0 auto; }
   nav .logo {
     margin: 5px;
+    float: left; }
+  nav .pages {
+    float: left; }
+  nav .social {
     float: left; }
   nav .hamburger {
     margin: 15px;
@@ -129,12 +137,14 @@ nav {
 /* ----- Home header ----- */
 header.home {
   background: url("../img/header.png");
-  /*padding-bottom: 60px; - for mobile size*/ }
+  /*padding-bottom: 60px; - for mobile size*/
+  padding: 150px 5px 90px; }
 
 header.home h1, .home span, .home p {
   color: white; }
 
 header .trailer {
+  margin: 0 0 30px;
   -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4); }
 
@@ -144,6 +154,8 @@ header #row {
 /* ----- Showings section (home) ----- */
 section.showings {
   margin-bottom: 30px; }
+  section.showings div {
+    margin-bottom: 15px; }
 
 section.showings h2 {
   padding: 15px 0 5px; }
@@ -180,6 +192,9 @@ section.about .right p {
   padding: 15px; }
 
 /* ----- Preregister section ----- */
+h1.preregister {
+  text-align: center; }
+
 .form-container {
   max-width: 420px;
   margin: 0 60px; }

@@ -8,15 +8,10 @@ No media query since this is the default in Bootstrap */
     margin: 0 auto;
   }
 
-  header {
-    .home {
-      max-height: 400px;
+  header.home {
+      // max-height: 400px;
+      padding: 150px 0 ;
     }
-  }
-
-
-
-
 
 }
 
@@ -25,6 +20,10 @@ No media query since this is the default in Bootstrap */
 
   nav {
     position: fixed;
+
+    .pages {
+      float: right;
+    }
 
     i.hamburger {
       display: none;
@@ -37,7 +36,7 @@ No media query since this is the default in Bootstrap */
 
   header {
     .trailer {
-      margin: 120px 0 105px;
+      margin-bottom: 0;
     }
   }
 
@@ -46,6 +45,7 @@ No media query since this is the default in Bootstrap */
   }
 
 }
+
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
