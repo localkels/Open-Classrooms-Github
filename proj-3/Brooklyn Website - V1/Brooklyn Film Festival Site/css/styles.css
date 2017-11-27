@@ -1,0 +1,305 @@
+/* MINI-STYLESHEET */
+/***** IMPORTS *****/
+/*  Upcoming Showings Page */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:700|Roboto:400,700");
+header.pg-head {
+  background: url("../img/header.png");
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 60px; }
+  header.pg-head .pg-title {
+    color: white;
+    margin: 125px 0 105px;
+    text-align: right;
+    font-size: 1.1em; }
+    header.pg-head .pg-title h1, header.pg-head .pg-title h2, header.pg-head .pg-title h3, header.pg-head .pg-title h4, header.pg-head .pg-title h5 {
+      color: white; }
+
+/* ----- Grid List ----- */
+section.show-grid {
+  margin-top: 60px; }
+  section.show-grid .box {
+    background: #F7F7F7;
+    margin: 0;
+    padding: 0; }
+  section.show-grid .gray-btn {
+    float: none; }
+
+/*  Preregister page  */
+body.bg-img {
+  background: url("../img/header.png"); }
+
+.form-card {
+  margin: 105px auto;
+  padding: 30px;
+  max-width: 720px;
+  background-color: #F7F7F7;
+  -webkit-box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.6); }
+  .form-card h1 {
+    margin-bottom: 15px; }
+  .form-card hr {
+    margin: 30px 0; }
+
+/*  About page  */
+.about-pg header.pg-head {
+  background: url("../img/festival.png");
+  background-position: bottom;
+  background-size: cover;
+  margin-bottom: 60px; }
+
+.about-pg .row img {
+  margin: 5px 0; }
+
+.about-pg .right p {
+  background: rgba(0, 0, 0, 0.3); }
+
+/*  News page  */
+.news-pg .main div {
+  margin: 15px 0; }
+
+.news-pg .main img {
+  display: inline-block; }
+
+.news-pg .left-col {
+  text-align: right; }
+
+/* --- FONTS --- */
+/* ----- General ----- */
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #94989A; }
+
+img {
+  max-width: 100%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 600;
+  color: #7A7D7F; }
+
+section h1 {
+  margin: 60px auto 15px;
+  text-align: center; }
+
+/* Work on this later */
+.green-h1 {
+  border-bottom: #77ff4e solid 5px;
+  padding-bottom: 5px;
+  width: 150px;
+  margin: 0 auto 30px; }
+
+/* ----- Nav ----- */
+nav {
+  background: rgba(0, 0, 0, 0.6);
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8em;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  z-index: 100; }
+  nav .navContainer {
+    padding: 0 auto;
+    overflow: auto;
+    margin: 0 auto; }
+  nav .logo {
+    margin: 5px;
+    float: left; }
+  nav .pages {
+    float: left; }
+  nav .social {
+    float: left; }
+  nav .hamburger {
+    margin: 15px;
+    font-size: 1.2em;
+    float: right; }
+  nav .hamburger:hover {
+    color: purple; }
+  nav ul {
+    margin: 5px;
+    padding: 0 0;
+    list-style: none;
+    float: right;
+    display: hidden; }
+    nav ul a.active {
+      color: #77ff4e; }
+    nav ul li {
+      display: inline-block;
+      padding: 7.5px 7.5px; }
+      nav ul li a {
+        color: white; }
+      nav ul li a:hover {
+        color: #77ff4e;
+        text-decoration: none; }
+  nav ul:hover {
+    display: block; }
+
+/* ----- Home header ----- */
+header.home {
+  background: url("../img/header.png");
+  /*padding-bottom: 60px; - for mobile size*/
+  padding: 150px 5px 90px; }
+
+header.home h1, .home span, .home p {
+  color: white; }
+
+header .trailer {
+  margin: 0 0 30px;
+  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4); }
+
+header #row {
+  min-height: 800px; }
+
+/* ----- Showings section (home) ----- */
+section.showings {
+  margin-bottom: 30px; }
+  section.showings div {
+    margin-bottom: 15px; }
+
+section.showings h2 {
+  padding: 15px 0 5px; }
+
+.btn-right {
+  float: right;
+  display: inline-block; }
+
+/* ----- About section (home) ----- */
+section.about {
+  color: #fff;
+  margin: 60px 0 0;
+  background-image: url("../img/festival.png");
+  background-size: cover;
+  background-position: bottom;
+  /* Later: Try to get img transparent with black bg */ }
+
+/* Important column */
+section.about .left {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 60px 15px; }
+
+section.about .left h1 {
+  margin: 0;
+  color: #fff; }
+
+section.about span.green {
+  color: #77ff4e;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.8em; }
+
+section.about .right p {
+  padding: 15px; }
+
+/* ----- Preregister section ----- */
+h1.preregister {
+  text-align: center; }
+
+.form-container {
+  max-width: 420px;
+  margin: 0 60px; }
+
+/* ----- Footer ----- */
+footer.pg-footer {
+  background: #000;
+  margin-top: 60px;
+  padding: 60px 0;
+  font-size: 0.8em; }
+  footer.pg-footer span {
+    font-weight: bold;
+    font-size: 1.2em; }
+  footer.pg-footer ul {
+    font-size: 0.8em;
+    margin: 15px auto;
+    text-align: right; }
+  footer.pg-footer li {
+    margin: 0 15px;
+    list-style: none; }
+    footer.pg-footer li a {
+      color: #94989A; }
+    footer.pg-footer li a:hover {
+      color: #77ff4e;
+      text-decoration: none; }
+
+/* ----- Custom Buttons ----- */
+/* Green button */
+.green-btn {
+  background: #77ff4e;
+  color: #30661f;
+  font-weight: bold;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding: 15px 35px;
+  -webkit-transition: color .5s;
+  -o-transition: color .5s;
+  transition: color .5s;
+  -webkit-transition: -webkit-box-shadow .5s;
+  transition: -webkit-box-shadow .5s;
+  -o-transition: box-shadow .5s;
+  transition: box-shadow .5s;
+  transition: box-shadow .5s, -webkit-box-shadow .5s; }
+
+.green-btn:hover {
+  text-decoration: none;
+  color: #fff;
+  -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6); }
+
+/* Gray button */
+.gray-btn {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #94989A;
+  background: transparent;
+  border: solid 5px #94989A;
+  padding: 5px 10px;
+  float: right;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: background .5s;
+  -o-transition: background .5s;
+  transition: background .5s;
+  -webkit-transition: color .5s;
+  -o-transition: color .5s;
+  transition: color .5s;
+  -webkit-transition: border .3s;
+  -o-transition: border .3s;
+  transition: border .3s; }
+
+.gray-btn:hover {
+  background: #77ff4e;
+  color: #30661f;
+  border: solid 5px #77ff4e;
+  text-decoration: none;
+  -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6); }
+
+/* Row center fix thing */
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.row > [class*='col-'] {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center; }
+
+.row > [class*='col-'] img {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center; }

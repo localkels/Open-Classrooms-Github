@@ -60,6 +60,9 @@ body.bg-img {
 .news-pg .main div {
   margin: 15px 0; }
 
+.news-pg .main img {
+  display: inline-block; }
+
 .news-pg .left-col {
   text-align: right; }
 
