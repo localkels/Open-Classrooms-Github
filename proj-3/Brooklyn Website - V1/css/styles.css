@@ -276,7 +276,7 @@ footer.pg-footer {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6); }
 
 /* Row center fix thing */
-.row {
+div.center-align {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -285,7 +285,7 @@ footer.pg-footer {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
 
-.row > [class*='col-'] {
+div.center-align > [class*='col-'] {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -299,7 +299,12 @@ footer.pg-footer {
   -ms-flex-item-align: center;
   align-self: center; }
 
-.row > [class*='col-'] img {
+div.center-align > [class*='col-'] img {
   -webkit-align-self: center;
   -ms-flex-item-align: center;
   align-self: center; }
+
+.align-off {
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto; }

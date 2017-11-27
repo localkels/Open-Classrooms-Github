@@ -338,7 +338,7 @@ footer.pg-footer {
 
 /* Row center fix thing */
 
-.row {
+div.center-align {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -346,12 +346,16 @@ footer.pg-footer {
   flex-wrap: wrap;
 }
 
-.row > [class*='col-'] {
+div.center-align > [class*='col-'] {
   display: flex;
   flex-direction: column;
   align-self: center;
 }
 
-.row > [class*='col-'] img {
+div.center-align > [class*='col-'] img {
   align-self: center;
+}
+
+.align-off {
+  align-self: auto;
 }
