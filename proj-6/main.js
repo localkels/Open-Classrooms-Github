@@ -364,11 +364,13 @@ $(function() {
     function checkForRoundChange() {
       // check if both players have a .fightState other than (i.e. greater than) "EMPTY"/1
       console.log("Checking for round change.");
-      if (player1.fightState < 1 && player2.fightState < 1) {
+      // console.log("Player1.fightState:" + player1.fightState);
+      // console.log("Player2.fightState:" + player2.fightState);
+      if (player1.fightState > 1 && player2.fightState > 1) {
         console.log("Both players have chosen!");
         roundChange();
 
-        return true;
+        // return true;
 
       } else {
         console.log("not running roundChange()");
@@ -426,11 +428,11 @@ $(function() {
   // ========================================================================================= //
 
   function runBeginState() {
-    console.log('Running Begin State');
+    // console.log('Running Begin State');
     // Begin state is intended to...
     // Give background info on context of game and short explanation of how game works.
 
-    console.log('Ending Begin State');
+    // console.log('Ending Begin State');
 
   }
 
