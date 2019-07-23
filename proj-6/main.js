@@ -22,6 +22,9 @@
 // Have all possible moves be obvious even before hover.
 // Make code modular (in other .js files) -> see line 30
 
+// --- Bug Reports --- //
+// It is possible for both players to spawn on the same exact tile.
+
 
 // ---------- Initializing jQuery ---------- //
 
