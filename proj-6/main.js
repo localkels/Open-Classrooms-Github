@@ -383,18 +383,43 @@ $(function() {
         givingMode.round += 1;
         console.log("Round " + givingMode.round);
 
-        //
+        // Based on each player's choice (fightState), run function that subtracts from each player's sadPoints.
+        subtractSadPoints();
 
 
 
         player1.fightState = PlayerFightState.EMPTY;
         player2.fightState = PlayerFightState.EMPTY;
-        console.log("Player1's FightState:" + player1.fightState);
-        console.log("Player2's FightState:" + player2.fightState);
+        // console.log("Player1's FightState:" + player1.fightState);
+        // console.log("Player2's FightState:" + player2.fightState);
 
 
+    }
+
+    function subtractSadPoints() {
+
+      // if player1 chose give
+      // then, player2.sadPoints -= player1.giftStrength
 
 
+      if (player1.fightState === 2 && player2.fightState === 2) {
+        // if both chose give
+        console.log("Both chose to give!");
+        player1.sadPoints -= player2.giftStrength;
+        player2.sadPoints -= player1.giftStrength;
+
+      } else if (player1.fightState === 2 && player2.fightState === 3) {
+        // if player1 choses give, but player 2 choses complain
+        console.log("P1 chose give, but P2 chose complain.");
+
+      } else if (player1.fightState === 3 && player2.fightState === 2) {
+        // if player2 choses give, but player1 choses complain
+        console.log("P2 chose give, but P1 chose complain.");
+
+      } else if (player1.fightState === 3 && player2.fightState === 3) {
+        console.log("Both chose complain!");
+
+      }
 
     }
 
