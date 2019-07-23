@@ -200,7 +200,7 @@ $(function() {
 
       this.give = function() {
         this.fightState = PlayerFightState.GIVING;
-        console.log('Player' + this.nr + ' is ' + this.fightState + '.');
+        console.log('Player' + this.nr + ' chose to give.');
 
         checkForRoundChange();
 
@@ -214,7 +214,7 @@ $(function() {
       this.complain = function() {
 
         this.fightState = PlayerFightState.COMPLAINING;
-        console.log('Player' + this.nr + ' is ' + this.fightState + '.');
+        console.log('Player' + this.nr + ' chose to complain.');
 
         checkForRoundChange();
 
@@ -383,12 +383,17 @@ $(function() {
         givingMode.round += 1;
         console.log("Round " + givingMode.round);
 
-        // if checkForRoundChange = true,
-        // set both player .fightState to "EMPTY"/1
+        //
+
+
+
         player1.fightState = PlayerFightState.EMPTY;
         player2.fightState = PlayerFightState.EMPTY;
         console.log("Player1's FightState:" + player1.fightState);
         console.log("Player2's FightState:" + player2.fightState);
+
+
+
 
 
     }
