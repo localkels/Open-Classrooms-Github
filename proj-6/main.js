@@ -22,11 +22,11 @@
 // Have all possible moves be obvious even before hover.
 // Make code modular (in other .js files) -> see line 30
 
-// --- Bug Reports --- //
+// ------ Bug Reports ------ //
 // It is possible for both players to spawn on the same exact tile.
 
 
-// ---------- Initializing jQuery ---------- //
+// ---------------- Initializing jQuery ---------------- //
 
 $(function() {
 
@@ -216,6 +216,8 @@ $(function() {
         this.fightState = PlayerFightState.COMPLAINING;
         console.log('Player' + this.nr + ' is ' + this.fightState + '.');
 
+        checkForRoundChange();
+
       }
 
       this.receiveGift = function(toBeSubtracted) {
@@ -369,7 +371,7 @@ $(function() {
         return true;
 
       } else {
-
+        console.log("not running roundChange()");
       }
 
     }
@@ -474,7 +476,7 @@ $(function() {
     updateUi();
 
     // runExploreState();
-    console.log('Ending Explore State');
+    // console.log('Ending Explore State');
   }
 
   function runGivingState() {
@@ -489,9 +491,7 @@ $(function() {
     // Giving/Complaining needs to take place here.
 
     isFirstGivingRound = false;
-    console.log('Ending Giving State');
-    roundChange();
-
+    // console.log('Ending Giving State');
   }
 
 
