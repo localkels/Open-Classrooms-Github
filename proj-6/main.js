@@ -199,6 +199,10 @@ $(function() {
         this.fightState = PlayerFightState.GIVING;
         console.log('Player' + this.nr + ' is ' + this.fightState + '.');
 
+        checkForRoundChange();
+
+
+
 
         // Subtract sadPoints to other player and this player.
 
@@ -332,7 +336,8 @@ $(function() {
 
 
   let givingMode = {
-    round: 1
+    // turn: 0,
+    round: 0
   };
 
 
@@ -353,7 +358,10 @@ $(function() {
 
     function checkForRoundChange() {
       // check if both players have a .fightState other than (i.e. greater than) "EMPTY"/1
+      console.log("Checking for round change.");
       if (player1.fightState < 1 && player2.fightState < 1) {
+        console.log("Both players have chosen!");
+        roundChange();
 
         return true;
 
@@ -364,18 +372,17 @@ $(function() {
     }
 
     function roundChange() {
-      if (checkForRoundChange()) {
+      console.log("Running roungChange()");
         givingMode.round += 1;
         console.log("Round " + givingMode.round);
 
         // if checkForRoundChange = true,
         // set both player .fightState to "EMPTY"/1
-        player1.fightState = EMPTY;
-        player2.fightState = EMPTY;
-        console.log(player1.fightState);
+        player1.fightState = PlayerFightState.EMPTY;
+        player2.fightState = PlayerFightState.EMPTY;
+        console.log("Player1's FightState:" + player1.fightState);
+        console.log("Player2's FightState:" + player2.fightState);
 
-
-      }
 
     }
 
