@@ -74,7 +74,19 @@ $(function() {
   let activeGameState = EXPLORE; // Set current state here.
 
 
-  const PlayerFightState = Object.freeze({"EMPTY":1, "GIVING":2, "COMPLAINING":3});
+  const PlayerFightState = Object.freeze({
+      "EMPTY":1,
+      "GIVING":2,
+      "COMPLAINING":3
+    });
+
+    const GiftStrengthAmount = Object.freeze({
+        "XS": 20,
+        "SM": 22,
+        "MD": 24,
+        "LG": 26,
+        "XL": 28
+      });
 
   // Create global variables for objects.
   let gift1;
@@ -200,7 +212,7 @@ $(function() {
 
       this.give = function() {
         this.fightState = PlayerFightState.GIVING;
-        console.log('Player' + this.nr + ' chose to give.');
+        // console.log('Player' + this.nr + ' chose to give.');
 
         checkForRoundChange();
 
@@ -214,7 +226,7 @@ $(function() {
       this.complain = function() {
 
         this.fightState = PlayerFightState.COMPLAINING;
-        console.log('Player' + this.nr + ' chose to complain.');
+        // console.log('Player' + this.nr + ' chose to complain.');
 
         checkForRoundChange();
 
@@ -351,8 +363,6 @@ $(function() {
 
   // Change: addGiftToPlayer triggers when player passes through gift
 
-  console.log(giveButtonP1);
-
   checkForStateChange(); // add 'newState' parameter
 
 
@@ -363,23 +373,23 @@ $(function() {
 
     function checkForRoundChange() {
       // check if both players have a .fightState other than (i.e. greater than) "EMPTY"/1
-      console.log("Checking for round change.");
+      // console.log("Checking for round change.");
       // console.log("Player1.fightState:" + player1.fightState);
       // console.log("Player2.fightState:" + player2.fightState);
       if (player1.fightState > 1 && player2.fightState > 1) {
-        console.log("Both players have chosen!");
+        // console.log("Both players have chosen!");
         roundChange();
 
         // return true;
 
       } else {
-        console.log("not running roundChange()");
+        // console.log("not running roundChange()");
       }
 
     }
 
     function roundChange() {
-      console.log("Running roungChange()");
+      // console.log("Running roungChange()");
         givingMode.round += 1;
         console.log("Round " + givingMode.round);
 
@@ -393,6 +403,8 @@ $(function() {
         // console.log("Player1's FightState:" + player1.fightState);
         // console.log("Player2's FightState:" + player2.fightState);
 
+        checkForGameEnd()
+
 
     }
 
@@ -404,29 +416,48 @@ $(function() {
 
       if (player1.fightState === 2 && player2.fightState === 2) {
         // if both chose give
-        console.log("Both chose to give!");
+        // console.log("Both chose to give!");
+
         player1.sadPoints -= player2.giftStrength;
         player2.sadPoints -= player1.giftStrength;
 
       } else if (player1.fightState === 2 && player2.fightState === 3) {
         // if player1 choses give, but player 2 choses complain
-        console.log("P1 chose give, but P2 chose complain.");
-        console.log("50% of " + player1.giftStrength + " is " + (player1.giftStrength / 2));
+        // console.log("P1 chose give, but P2 chose complain.");
+        // console.log("50% of " + player1.giftStrength + " is " + (player1.giftStrength / 2));
 
         player2.sadPoints -= (player1.giftStrength / 2);
 
 
       } else if (player1.fightState === 3 && player2.fightState === 2) {
         // if player2 choses give, but player1 choses complain
-        console.log("P2 chose give, but P1 chose complain.");
-        console.log("50% of " + player2.giftStrength + " is " + (player2.giftStrength / 2));
+        // console.log("P2 chose give, but P1 chose complain.");
+        // console.log("50% of " + player2.giftStrength + " is " + (player2.giftStrength / 2));
+
         player1.sadPoints -= (player2.giftStrength / 2);
 
       } else if (player1.fightState === 3 && player2.fightState === 3) {
-        console.log("Both chose complain!");
+        // console.log("Both chose complain!");
 
       }
 
+    }
+
+    function checkForGameEnd() {
+
+      if (player1.sadPoints <= 0){
+
+        console.log("GAME OVER! Player 2 wins!");
+        activeGameState = END;
+        checkForStateChange();
+
+      } else if (player2.sadPoints <= 0) {
+
+        console.log("GAME OVER! Player 1 wins!");
+        activeGameState = END;
+        checkForStateChange();
+
+      }
     }
 
 
@@ -484,22 +515,22 @@ $(function() {
     getGiftPositions();
 
 
-    // Gifts created
-    gift1 = new Gift('sm', 6, giftsX[0], giftsY[0]);
+    // Gifts being created
+    gift1 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
     gift1.stylize();
-    gift2 = new Gift('md', 8, giftsX[1], giftsY[1]);
+    gift2 = new Gift('md', GiftStrengthAmount.MD, giftsX[1], giftsY[1]);
     gift2.stylize();
-    gift3 = new Gift('lg', 10, giftsX[2], giftsY[2]);
+    gift3 = new Gift('lg', GiftStrengthAmount.LG, giftsX[2], giftsY[2]);
     gift3.stylize();
-    gift4 = new Gift('xl', 12, giftsX[3], giftsY[3]);
+    gift4 = new Gift('xl', GiftStrengthAmount.XL, giftsX[3], giftsY[3]);
     gift4.stylize();
 
     getPlayerPositions();
 
     // Object params: Player(x, y, sadPoints, giftType, giftStrength)
-    player1 = new Player(1, playersX[0], playersY[0], 100, 'xs', 4);
+    player1 = new Player(1, playersX[0], playersY[0], 100, 'xs', GiftStrengthAmount.XS);
     player1.stylize();
-    player2 = new Player(2, playersX[1], playersY[1], 100, 'xs', 4);
+    player2 = new Player(2, playersX[1], playersY[1], 100, 'xs', GiftStrengthAmount.XS);
     player2.stylize();
 
     // jQuery => .on()
@@ -581,6 +612,7 @@ $(function() {
       if (clickedGiftType) {
         // console.log('you checked for a click on a gift');
 
+        // Do something here to have player drop his original gift
         if (activePlayer.giftType === 'xs') {
           addGiftToPlayer(clickedGiftType);
           activePlayer.drop();
@@ -671,22 +703,58 @@ $(function() {
   }
 
   function addGiftToPlayer(giftType) {
-    console.log('addGiftToPlayer()');
+    // console.log('addGiftToPlayer()');
     console.log('giftType= ' + giftType);
+
     // When this is called, it seems activePlayer has already been sure.
     if (activePlayer === player1) {
       player1.prevGiftType = player1.giftType;
 
       // New giftType added
       player1.giftType = giftType;
+      // Adjust player's giftStrength accordingly.
+      if (giftType === 'sm') {
+        console.log("You picked up a sm gift");
+        player1.giftStrength = GiftStrengthAmount.SM;
+
+      } else if (giftType === 'md') {
+        console.log("You picked up an md gift");
+        player1.giftStrength = GiftStrengthAmount.MD;
+
+      } else if (giftType === 'lg') {
+        console.log("You picked up a lg gift");
+        player1.giftStrength = GiftStrengthAmount.LG;
+
+      } else if (giftType === 'xl') {
+        console.log("You picked up an xl gift");
+        player1.giftStrength = GiftStrengthAmount.XL;
+
+      }
 
     } else {
       player2.prevGiftType = player2.giftType;
 
       // New giftType added
       player2.giftType = giftType;
-      // gift4.activeTile.style.backgroundColor = p2Background;
+      if (giftType === 'sm') {
+        console.log("You picked up a sm gift");
+        player2.giftStrength = GiftStrengthAmount.SM;
+
+      } else if (giftType === 'md') {
+        console.log("You picked up an md gift");
+        player2.giftStrength = GiftStrengthAmount.MD;
+
+      } else if (giftType === 'lg') {
+        console.log("You picked up a lg gift");
+        player2.giftStrength = GiftStrengthAmount.LG;
+
+      } else if (giftType === 'xl') {
+        console.log("You picked up an xl gift");
+        player2.giftStrength = GiftStrengthAmount.XL;
+
+      }
     }
+    console.log(activePlayer.giftStrength);
   }
 
 
