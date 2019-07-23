@@ -411,10 +411,16 @@ $(function() {
       } else if (player1.fightState === 2 && player2.fightState === 3) {
         // if player1 choses give, but player 2 choses complain
         console.log("P1 chose give, but P2 chose complain.");
+        console.log("50% of " + player1.giftStrength + " is " + (player1.giftStrength / 2));
+
+        player2.sadPoints -= (player1.giftStrength / 2);
+
 
       } else if (player1.fightState === 3 && player2.fightState === 2) {
         // if player2 choses give, but player1 choses complain
         console.log("P2 chose give, but P1 chose complain.");
+        console.log("50% of " + player2.giftStrength + " is " + (player2.giftStrength / 2));
+        player1.sadPoints -= (player2.giftStrength / 2);
 
       } else if (player1.fightState === 3 && player2.fightState === 3) {
         console.log("Both chose complain!");
