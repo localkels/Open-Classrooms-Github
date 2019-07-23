@@ -349,6 +349,37 @@ $(function() {
 
   ////////////////////////////// FUNCTIONS //////////////////////////////
 
+  // ==================================== FIGHT FUNCTIONS ====================================== //
+
+    function checkForRoundChange() {
+      // check if both players have a .fightState other than (i.e. greater than) "EMPTY"/1
+      if (player1.fightState < 1 && player2.fightState < 1) {
+
+        return true;
+
+      } else {
+
+      }
+
+    }
+
+    function roundChange() {
+      if (checkForRoundChange()) {
+        givingMode.round += 1;
+        console.log("Round " + givingMode.round);
+
+        // if checkForRoundChange = true,
+        // set both player .fightState to "EMPTY"/1
+        player1.fightState = EMPTY;
+        player2.fightState = EMPTY;
+        console.log(player1.fightState);
+
+
+      }
+
+    }
+
+
   function checkForStateChange() {
     if (activeGameState === BEGIN) {
       runBeginState();
@@ -437,16 +468,19 @@ $(function() {
   }
 
   function runGivingState() {
-    // console.log('Running Giving State');
+    console.log('Running Giving State');
     refreshGivingGrid();
 
-    // Enable "give" and "complain" buttons
+    // Enables "give" and "complain" buttons
     enableUiButtons(activePlayer);
 
     console.log("Round " + givingMode.round);
 
+    // Giving/Complaining needs to take place here.
+
     isFirstGivingRound = false;
-    // console.log('Ending Giving State');
+    console.log('Ending Giving State');
+    roundChange();
 
   }
 
@@ -460,32 +494,6 @@ $(function() {
 
   }
 
-// ==================================== FIGHT FUNCTIONS ====================================== //
-
-  function checkForRoundChange() {
-    // check if both players have a .fightState other than (i.e. greater than) "EMPTY"/1
-    if (player1.fightState < 1 && player2.fightState < 1) {
-
-      return true;
-
-    } else {
-
-    }
-
-  }
-
-  function roundChange() {
-    if (checkForRoundChange()) {
-      givingMode.round += 1;
-      console.log("Round " + givingMode.round);
-
-      // if checkForRoundChange = true,
-      // set both player .fightState to "EMPTY"/1
-
-
-    }
-
-  }
 
   // ================================================================================================== //
   // ==================================== CHECKING PLAYER CLICK ====================================== //
