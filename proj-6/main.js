@@ -3,12 +3,12 @@
 
 // --- Focus on this --- //
 
+// Have possible moves remain highlighted for activePlayer.
 
 // --- For Further Study -- //
 
 // Look up "Git in Atom"
 // Also look up template literals
-
 // Look into altering the css with -> .css and .addClass, .removeClass
 
 // ------- Possible Updates ------- //
