@@ -3,8 +3,7 @@
 
 // --- Focus on this --- //
 
-// Have possible moves remain highlighted for activePlayer.
-// BUG: pos. moves with gift blocks not highlighting
+
 
 // --- For Further Study -- //
 
@@ -14,14 +13,15 @@
 
 // ------- Possible Updates ------- //
 
+// Make player pick up a weapon by passing through it.
 // Do a simple check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
 //DO :hover !!! when user hovers over give or complain - explain what the button will do. ex. "-10 sad points to player1 (aka other player)")
 // If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
-// Have all possible moves be obvious even before hover.
 // Make code modular (in other .js files) -> see line 30
 
+
 // ------ Bug Reports ------ //
-// It is possible for both players to spawn on the same exact tile!
+// It is possible for both players to spawn on the same exact tile, or on adjacent tiles!
 
 
 // ---------------- Initializing jQuery ---------------- //
@@ -86,10 +86,10 @@ $(function() {
       });
 
   // Create global variables for objects.
-  let gift1;
-  let gift2;
-  let gift3;
-  let gift4;
+  let giftSM;
+  let giftMD;
+  let giftLG;
+  let giftXL;
 
   let player1;
   let player2;
@@ -170,32 +170,32 @@ $(function() {
         if (this.prevGiftType === "xs") {
 
         } else if (this.prevGiftType === "sm") {
-          gift1.x = this.x;
-          gift1.y = this.y;
+          giftSM.x = this.x;
+          giftSM.y = this.y;
 
-          // console.log('gift1 hidden = false');
-          gift1.hidden = false;
+          // console.log('giftSM hidden = false');
+          giftSM.hidden = false;
 
         } else if (this.prevGiftType === "md") {
-          gift2.x = this.x;
-          gift2.y = this.y;
+          giftMD.x = this.x;
+          giftMD.y = this.y;
 
-          // console.log('gift2 hidden = false');
-          gift2.hidden = false;
+          // console.log('giftMD hidden = false');
+          giftMD.hidden = false;
 
         } else if (this.prevGiftType === "lg") {
-          gift3.x = this.x;
-          gift3.y = this.y;
+          giftLG.x = this.x;
+          giftLG.y = this.y;
 
-          // console.log('gift3 hidden = false');
-          gift3.hidden = false;
+          // console.log('giftLG hidden = false');
+          giftLG.hidden = false;
 
         } else if (this.prevGiftType === "xl") {
-          gift4.x = this.x;
-          gift4.y = this.y;
+          giftXL.x = this.x;
+          giftXL.y = this.y;
 
-          // console.log('gift4 hidden = false');
-          gift4.hidden = false;
+          // console.log('giftXL hidden = false');
+          giftXL.hidden = false;
 
         }
 
@@ -323,7 +323,7 @@ $(function() {
             this.activeTile.style = smGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              gift1.activeTile.style.backgroundColor = possibleMovesBackground;
+              giftSM.activeTile.style.backgroundColor = possibleMovesBackground;
 
 
             }
@@ -331,21 +331,21 @@ $(function() {
             this.activeTile.style = mdGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              gift2.activeTile.style.backgroundColor = possibleMovesBackground;
+              giftMD.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           } else if (this.giftType === 'lg') {
             this.activeTile.style = lgGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              gift3.activeTile.style.backgroundColor = possibleMovesBackground;
+              giftLG.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           } else if (this.giftType === 'xl') {
             this.activeTile.style = xlGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              gift4.activeTile.style.backgroundColor = possibleMovesBackground;
+              giftXL.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           }
@@ -595,14 +595,14 @@ $(function() {
 
 
     // Gifts being created
-    gift1 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
-    gift1.stylize();
-    gift2 = new Gift('md', GiftStrengthAmount.MD, giftsX[1], giftsY[1]);
-    gift2.stylize();
-    gift3 = new Gift('lg', GiftStrengthAmount.LG, giftsX[2], giftsY[2]);
-    gift3.stylize();
-    gift4 = new Gift('xl', GiftStrengthAmount.XL, giftsX[3], giftsY[3]);
-    gift4.stylize();
+    giftSM = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
+    giftSM.stylize();
+    giftMD = new Gift('md', GiftStrengthAmount.MD, giftsX[1], giftsY[1]);
+    giftMD.stylize();
+    giftLG = new Gift('lg', GiftStrengthAmount.LG, giftsX[2], giftsY[2]);
+    giftLG.stylize();
+    giftXL = new Gift('xl', GiftStrengthAmount.XL, giftsX[3], giftsY[3]);
+    giftXL.stylize();
 
     getPlayerPositions();
 
@@ -739,43 +739,43 @@ $(function() {
 
   function getGiftAtClick(event, hideGift) {
 
-    if (false === gift1.hidden && xCalc(event.clientX) === gift1.x && yCalc(event.clientY) === gift1.y) {
+    if (false === giftSM.hidden && xCalc(event.clientX) === giftSM.x && yCalc(event.clientY) === giftSM.y) {
 
       if (true === hideGift) {
-        gift1.hidden = true;
+        giftSM.hidden = true;
 
       }
-      return gift1.giftType;
+      return giftSM.giftType;
 
-    } else if (false === gift2.hidden && xCalc(event.clientX) === gift2.x && yCalc(event.clientY) === gift2.y) {
+    } else if (false === giftMD.hidden && xCalc(event.clientX) === giftMD.x && yCalc(event.clientY) === giftMD.y) {
       if (true === hideGift) {
-        gift2.hidden = true;
-
-      }
-
-      return gift2.giftType;
-
-    } else if (false === gift3.hidden && xCalc(event.clientX) === gift3.x && yCalc(event.clientY) === gift3.y) {
-
-      if (true === hideGift) {
-        gift3.hidden = true;
+        giftMD.hidden = true;
 
       }
 
-      return gift3.giftType;
+      return giftMD.giftType;
 
-    } else if (false === gift4.hidden && xCalc(event.clientX) === gift4.x && yCalc(event.clientY) === gift4.y) {
+    } else if (false === giftLG.hidden && xCalc(event.clientX) === giftLG.x && yCalc(event.clientY) === giftLG.y) {
 
-      // console.log('you clicked on gift4');
+      if (true === hideGift) {
+        giftLG.hidden = true;
+
+      }
+
+      return giftLG.giftType;
+
+    } else if (false === giftXL.hidden && xCalc(event.clientX) === giftXL.x && yCalc(event.clientY) === giftXL.y) {
+
+      // console.log('you clicked on giftXL');
 
       // console.log('activePlayer: '+ activePlayer + ' | giftType: ' + activePlayer.giftType);
 
       if (true === hideGift) {
-        gift4.hidden = true;
+        giftXL.hidden = true;
 
       }
 
-      return gift4.giftType;
+      return giftXL.giftType;
     }
 
     return false;
@@ -1203,25 +1203,25 @@ $(function() {
         }
       }
 
-      if (randomPlayerX === gift1.x && randomPlayerY === gift1.y) {
+      if (randomPlayerX === giftSM.x && randomPlayerY === giftSM.y) {
         getPlayerPositions();
         return;
 
       }
 
-      if (randomPlayerX === gift2.x && randomPlayerY === gift2.y) {
+      if (randomPlayerX === giftMD.x && randomPlayerY === giftMD.y) {
         getPlayerPositions();
         return;
 
       }
 
-      if (randomPlayerX === gift3.x && randomPlayerY === gift3.y) {
+      if (randomPlayerX === giftLG.x && randomPlayerY === giftLG.y) {
         getPlayerPositions();
         return;
 
       }
 
-      if (randomPlayerX === gift4.x && randomPlayerY === gift4.y) {
+      if (randomPlayerX === giftXL.x && randomPlayerY === giftXL.y) {
         getPlayerPositions();
         return;
 
@@ -1293,10 +1293,10 @@ $(function() {
     }
 
     // Add gift, player and obstacle styles
-    gift1.stylize();
-    gift2.stylize();
-    gift3.stylize();
-    gift4.stylize();
+    giftSM.stylize();
+    giftMD.stylize();
+    giftLG.stylize();
+    giftXL.stylize();
 
     player1.stylize();
     player2.stylize();
@@ -1317,10 +1317,10 @@ $(function() {
     drawGrid();
 
     // Add gift, player and obstacle styles
-    gift1.stylize();
-    gift2.stylize();
-    gift3.stylize();
-    gift4.stylize();
+    giftSM.stylize();
+    giftMD.stylize();
+    giftLG.stylize();
+    giftXL.stylize();
 
 
     // Change styling of ALL other tiles, except for players
