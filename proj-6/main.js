@@ -60,7 +60,7 @@ $(function() {
   let possibleMoves = [];
   let gridRows = []; // Stores all rows
 
-  const NUM_OBSTACLES = 6;
+  const NUM_OBSTACLES = 0;
   const NUM_MOVES = 3;
 
   // Enumeration data structure
@@ -544,6 +544,7 @@ $(function() {
     activePlayer = player1;
 
     calcPossibleMoves();
+    refreshGrid();
 
     updateUi();
 
