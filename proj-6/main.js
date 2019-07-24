@@ -1,31 +1,34 @@
+/*
+
 // ------- STORY ------- //
-// Two friends are out in the field one day. Neither of them had a good day today. They're both feeling a bit down. See what you can find to cheer your friend up. After all, it might even help you feel better yourself.
+* Two friends are out in the field one day. Neither of them had a good day today. They're both feeling a bit down. See what you can find to cheer your friend up. After all, it might even help you feel better yourself.
 
 // --- Focus on this --- //
 
-// Make player pick up a gift by passing through it.
-// DO :hover !!! when user hovers over give or complain - explain what the button will do. ex. "-10 sad points to player1 (aka other player)")
+* DO :hover !!! when user hovers over give or complain - explain what the button will do. ex. "-10 sad points to player1 (aka other player)")
 
 
 // --- For Further Study -- //
 
-// Look up "Git in Atom"
-// Also look up template literals
-// Look into altering the css with -> .css and .addClass, .removeClass
+* Look up "Git in Atom"
+* Also look up template literals
+* Look into altering the css with -> .css and .addClass, .removeClass
 
 // ------- Possible Updates ------- //
 
+* Make player pick up a gift by passing through it.
 
-// opening screen, giving mode screen and end screen
+* opening screen, giving mode screen (with Round: 1!) and end screen
 
-
-// Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
-// If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
-// Make code modular (in other .js files) -> see line 30
+* Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
+* If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
+* Make code modular (in other .js files) -> see line 30
 
 
 // ------ Bug Reports ------ //
-// It is possible for both players to spawn on the same exact tile, or on adjacent tiles!
+* It is possible for both players to spawn on the same exact tile, or on adjacent tiles!
+
+*/
 
 
 // ---------------- Initializing jQuery ---------------- //
@@ -358,7 +361,7 @@ $(function() {
     }
   }
 
-  // For adding Obstacles with hard-coded positions (for testing purposes)
+  // For adding Obstacles with hard-coded positions (for testing purposes only)
   function Obstacle(x, y) {
     this.x = x; // positions (x and y)
     this.y = y;
@@ -371,7 +374,6 @@ $(function() {
 
 
   let givingMode = {
-    // turn: 0,
     round: 0
   };
 
