@@ -5,7 +5,6 @@
 
 // Have possible moves remain highlighted for activePlayer.
 // BUG: pos. moves with gift blocks not highlighting
-// BUG: when game starts, pos. moves not yet highlighting
 
 // --- For Further Study -- //
 
