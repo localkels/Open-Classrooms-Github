@@ -218,11 +218,6 @@ $(function() {
 
         checkForRoundChange();
 
-
-
-
-        // Subtract sadPoints to other player and this player.
-
       }
 
       this.complain = function() {
@@ -231,11 +226,6 @@ $(function() {
         // console.log('Player' + this.nr + ' chose to complain.');
 
         checkForRoundChange();
-
-      }
-
-      this.receiveGift = function(toBeSubtracted) {
-        this.sadPoints -= toBeSubtracted;
 
       }
 
@@ -328,14 +318,36 @@ $(function() {
       this.stylize = function() {
         if (this.hidden === false) {
           this.activeTile = gridRows[this.y].children[this.x];
+
           if (this.giftType === 'sm') {
             this.activeTile.style = smGiftStyles;
+            if (isGiftOnPossibleMove(this.giftType)) {
+              // Change background color to correct color (see highlight and refreshGrid)
+              gift1.activeTile.style.backgroundColor = possibleMovesBackground;
+
+
+            }
           } else if (this.giftType === 'md') {
             this.activeTile.style = mdGiftStyles;
+            if (isGiftOnPossibleMove(this.giftType)) {
+              // Change background color to correct color (see highlight and refreshGrid)
+              gift2.activeTile.style.backgroundColor = possibleMovesBackground;
+
+            }
           } else if (this.giftType === 'lg') {
             this.activeTile.style = lgGiftStyles;
+            if (isGiftOnPossibleMove(this.giftType)) {
+              // Change background color to correct color (see highlight and refreshGrid)
+              gift3.activeTile.style.backgroundColor = possibleMovesBackground;
+
+            }
           } else if (this.giftType === 'xl') {
             this.activeTile.style = xlGiftStyles;
+            if (isGiftOnPossibleMove(this.giftType)) {
+              // Change background color to correct color (see highlight and refreshGrid)
+              gift4.activeTile.style.backgroundColor = possibleMovesBackground;
+
+            }
           }
         }
       }
@@ -372,6 +384,71 @@ $(function() {
   ////////////////////////////// FUNCTIONS //////////////////////////////
 
   // ==================================== FIGHT FUNCTIONS ====================================== //
+
+    function isGiftOnPossibleMove(giftType) {
+
+      if (giftType === 'sm') {
+        for (let i = 0; i < possibleMoves.length; i++) {
+          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+          if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
+
+            return true;
+
+          }
+        }
+      } else if (giftType === 'md') {
+        for (let i = 0; i < possibleMoves.length; i++) {
+          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+          if (giftsX[1] === xCalc(possibleMoveX) && giftsY[1] === yCalc(possibleMoveY)) {
+
+            return true;
+
+          }
+        }
+
+      }else if (giftType === 'lg') {
+        for (let i = 0; i < possibleMoves.length; i++) {
+          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+          if (giftsX[2] === xCalc(possibleMoveX) && giftsY[2] === yCalc(possibleMoveY)) {
+
+            return true;
+
+          }
+        }
+
+      }else if (giftType === 'xl') {
+        for (let i = 0; i < possibleMoves.length; i++) {
+          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+          if (giftsX[3] === xCalc(possibleMoveX) && giftsY[3] === yCalc(possibleMoveY)) {
+
+            return true;
+
+          }
+        }
+
+      } else {
+        return false;
+      }
+
+
+    }
+
+    // function isClickOnPossibleMoves(event) {
+    //   for (let i = 0; i < possibleMoves.length; i++) {
+    //     if (event.target === possibleMoves[i]) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
 
     function checkForRoundChange() {
       // check if both players have a .fightState other than (i.e. greater than) "EMPTY"/1
