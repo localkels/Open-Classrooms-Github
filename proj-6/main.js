@@ -3,9 +3,6 @@
 
 // --- Focus on this --- //
 
-// Get .give() and .receiveGift() working
-
-
 
 // --- For Further Study -- //
 
@@ -23,7 +20,7 @@
 // Make code modular (in other .js files) -> see line 30
 
 // ------ Bug Reports ------ //
-// It is possible for both players to spawn on the same exact tile.
+// It is possible for both players to spawn on the same exact tile!
 
 
 // ---------------- Initializing jQuery ---------------- //
@@ -38,8 +35,7 @@ $(function() {
   const body = $('body')[0];
   const grid = $('.grid')[0]; // Why can't this work in jQuery?
 
-  // Rebeccah: Why
-  // When I put the $ sign, the const saves an array with the button in it, not the button itself. Why is that?
+  // Q: When I put the $ sign, the const saves an array with the button in it, not the button itself. Why is that?
   // Learned about jQuary objects
   const giveButtonP1 = $('#p1-give-btn')[0];
   const complainButtonP1 = $('#p1-complain-btn')[0];
