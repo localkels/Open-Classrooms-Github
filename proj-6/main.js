@@ -3,6 +3,8 @@
 
 // --- Focus on this --- //
 
+// Make player pick up a gift by passing through it.
+// DO :hover !!! when user hovers over give or complain - explain what the button will do. ex. "-10 sad points to player1 (aka other player)")
 
 
 // --- For Further Study -- //
@@ -13,9 +15,11 @@
 
 // ------- Possible Updates ------- //
 
-// Make player pick up a weapon by passing through it.
-// Do a simple check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
-//DO :hover !!! when user hovers over give or complain - explain what the button will do. ex. "-10 sad points to player1 (aka other player)")
+
+// opening screen, giving mode screen and end screen
+
+
+// Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
 // If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
 // Make code modular (in other .js files) -> see line 30
 
@@ -70,14 +74,14 @@ $(function() {
   const END = 4;
   let activeGameState = EXPLORE; // Set current state here.
 
-
+  // Even better enumeration!
   const PlayerFightState = Object.freeze({
       "EMPTY":1,
       "GIVING":2,
       "COMPLAINING":3
     });
 
-    const GiftStrengthAmount = Object.freeze({
+  const GiftStrengthAmount = Object.freeze({
         "XS": 20,
         "SM": 22,
         "MD": 24,
