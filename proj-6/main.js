@@ -4,6 +4,8 @@
 // --- Focus on this --- //
 
 // Have possible moves remain highlighted for activePlayer.
+// BUG: pos. moves with gift blocks not highlighting
+// BUG: when game starts, pos. moves not yet highlighting
 
 // --- For Further Study -- //
 
@@ -58,7 +60,7 @@ $(function() {
   let possibleMoves = [];
   let gridRows = []; // Stores all rows
 
-  const NUM_OBSTACLES = 0;
+  const NUM_OBSTACLES = 6;
   const NUM_MOVES = 3;
 
   // Enumeration data structure
@@ -120,9 +122,14 @@ $(function() {
   let p2Background = '#F4D03F';
   let p2Border = '#D4AC0D';
 
+  let highlightedBackground = '#ADFFCD';
+  let possibleMovesBackground = '#7cfebc';
+
   ////////////////   STYLES  ////////////////
 
   let defaultStyles = 'background: ' + defaultBackground + '; border: solid ' + defaultBorder + ' 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
+
+  let possibleMovesStyles = 'background: ' + possibleMovesBackground + '; border: solid ' + defaultBorder + ' 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
   let player1Styles = 'background: ' + p1Background + '; border: solid' + p1Border + ' 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
@@ -1046,12 +1053,12 @@ $(function() {
 
 
   function highlight(event) {
-    event.target.style.backgroundColor = "#ADFFCD";
+    event.target.style.backgroundColor = highlightedBackground;
   }
 
 
   function dehighlight(event) {
-    event.target.style.backgroundColor = "springgreen";
+    event.target.style.backgroundColor = possibleMovesBackground;
   }
 
   // ===================================================================================================== //
@@ -1205,7 +1212,7 @@ $(function() {
     calcPossibleMoves();
 
     for (let i = 0; i < possibleMoves.length; i++) {
-      possibleMoves[i].style = defaultStyles;
+      possibleMoves[i].style = possibleMovesStyles;
     }
 
     // Add gift, player and obstacle styles
