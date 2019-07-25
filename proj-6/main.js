@@ -21,6 +21,7 @@
 * If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
 * Make code modular (in other .js files) -> see line 30
 * Put styles directly into css and activate using jQuery .css, .addClass and .removeClass
+* Rearrange functions in a logical order (if you can't put code blocks in different files)
 
 
 // ------ Bug Reports ------ //
@@ -48,14 +49,6 @@ $(function() {
 
   const giveButtonP2 = $('#p2-give-btn')[0];
   const complainButtonP2 = $('#p2-complain-btn')[0];
-
-  // Instances for tippy.js
-  // const p1GiveTippy = tippy('#p1-give-btn');
-  // const p2GiveTippy = tippy('#p2-give-btn');
-  //
-  // const p1ComplainTippy = tippy('#p1-complain-btn');
-  // const p2ComplainTippy = tippy('#p2-complain-btn');
-
 
 
   let newDiv;
@@ -395,6 +388,30 @@ $(function() {
 
   ////////////////////////////// FUNCTIONS //////////////////////////////
 
+  function didPlayerPassGift(activePlayer) {
+    // console.log("Run didPlayerPassGift()");
+    console.log("activePlayer's X: " + activePlayer.x);
+
+    // check if player has same X
+    for (var i = 0; i < giftsX.length; i++) {
+
+
+      if (activePlayer.x === giftsX[i]) {
+        console.log("Player" + activePlayer.nr + " has same X as gift" + (i + 1) + ".");
+
+
+      }
+
+
+    }
+
+
+
+
+
+  }
+  // player1.x === player2.x || player1.y === player2.y
+
   // ==================================== FIGHT FUNCTIONS ====================================== //
 
     function isGiftOnPossibleMove(giftType) {
@@ -726,9 +743,13 @@ $(function() {
         }
       }
 
+      didPlayerPassGift(activePlayer);
+
       toggleTurns();
 
       refreshGrid();
+
+
 
     }
   }
