@@ -51,6 +51,13 @@ $(function() {
   const giveButtonP2 = $('#p2-give-btn')[0];
   const complainButtonP2 = $('#p2-complain-btn')[0];
 
+  // Instances for tippy.js
+  const p1GiveTippy = tippy('#p1-give-btn');
+  const p2GiveTippy = tippy('#p2-give-btn');
+
+  const p1ComplainTippy = tippy('#p1-complain-btn');
+  const p2ComplainTippy = tippy('#p2-complain-btn');
+
 
   let newDiv;
   let newSpan;
@@ -474,7 +481,7 @@ $(function() {
     }
 
     function roundChange() {
-      // console.log("Running roungChange()");
+      // console.log("Running roundChange()");
         givingMode.round += 1;
         console.log("Round " + givingMode.round);
 
@@ -637,6 +644,7 @@ $(function() {
   function runGivingState() {
     console.log('Running Giving State');
     refreshGivingGrid();
+
 
     // Enables "give" and "complain" buttons
     enableUiButtons(activePlayer);
@@ -1072,25 +1080,68 @@ $(function() {
   }
 
   function generateTooltipText(isHoverOnGive) {
+    console.log('running generateTooltipText()');
+
+    // See if you can put what will happen to their sadPoints if they choose the particular button.
+    // See if I can apply css styles to tooltip to align text left.
+
     let tooltipText;
 
     if (activePlayer === player1 && isHoverOnGive) {
-      tooltipText = "Subtract <em>" + active.giftStrength + "</em> sad points from Player2 at the end of the current round."
-      console.log(tooltipText);
+      // tooltipText = "Subtract <em>" + activePlayer.giftStrength + "</em> sad points from Player2 at the end of this round."
+      // tooltipText = "Player1 <br />-" + player1.giftStrength;
+      // tooltipText = "P"+ activePlayer.nr + " chose give";
+      tooltipText = "Player1's GiftType: " + player1.giftType + " CHOSE GIVE";
 
       // Something's wrong with the logic of the complain button text
     } else if (activePlayer === player1 && !isHoverOnGive) {
-      tooltipText = "Player2 can only subtract <em>" + (player2.giftStrength / 2) + "</em> sad points from you at the end of the current round. (Instead of " + player2.giftStrength + " sadPoints)"
+      // tooltipText = "Player2 can only subtract <em>" + (player2.giftStrength / 2) + "</em> sad points from you at the end of this round. (Instead of " + player2.giftStrength + " sadPoints)"
+      // tooltipText = "Player2 <br />-" + (player2.giftStrength / 2)
+      // tooltipText = "P" + activePlayer.nr + " chose complain";
+      tooltipText = "Player1's GiftType: " + player1.giftType + " CHOSE COMPLAIN";
 
     } else if (activePlayer === player2 && isHoverOnGive) {
-      tooltipText = "Subtract <em>" + activePlayer.giftStrength + "</em> sad points from Player2 at the end of the current round."
+      // tooltipText = "Subtract <em>" + activePlayer.giftStrength + "</em> sad points from Player2 at the end of this round."
+      // tooltipText = "Player1 <br />-" + player2.giftStrength;
+      // tooltipText = "P"+ activePlayer.nr + " chose give";
+      tooltipText = "Player2's GiftType: " + player2.giftType + " CHOSE GIVE";
+
 
       // Something's wrong with the logic of the complain button text.
     } else if (activePlayer === player2 && !isHoverOnGive) {
-      tooltipText = "Player1 can only subtract <em>" + (player1.giftStrength / 2) + "</em> sad points from you at the end of the current round. (Instead of " + player1.giftStrength + " sadPoints)"
+      // tooltipText = "Player1 can only subtract <em>" + (player1.giftStrength / 2) + "</em> sad points from you at the end of this round. (Instead of " + player1.giftStrength + " sadPoints) (Player2 sadPoints: - " + (player1.giftStrength / 2) + ")"
+      // tooltipText = "Player2 <br />-" + (player1.giftStrength / 2);
+      // tooltipText = "P" + activePlayer.nr + " chose complain";
+      tooltipText = "Player2's GiftType: " + player2.giftType + " CHOSE COMPLAIN";
     }
 
+    console.log(tooltipText);
     return tooltipText;
+
+
+  }
+
+  function updateTooltips(activePlayer) {
+    console.log("Run updateTooltips()");
+
+    if (activePlayer === player1) {
+      p1GiveTippy.set({
+        content: generateTooltipText(true)
+      })
+
+      p1ComplainTippy.set({
+        content: generateTooltipText(false)
+      })
+
+    } else {
+      p2GiveTippy.set({
+        content: generateTooltipText(true)
+      })
+      p2ComplainTippy.set({
+        content: generateTooltipText(false)
+      })
+
+    }
 
 
   }
@@ -1100,21 +1151,17 @@ $(function() {
 
 
     tippy.setDefaults({
-
+      placement: "bottom-start",
+      size: "small",
+      maxWidth: 150,
+      arrow: true,
+      content: "Loading..."
     })
 
-    tippy('#p1-give-btn', {
-    content: 'P1 Give',
-    })
-    tippy('#p2-give-btn', {
-    content: 'P2 Give',
-    })
-    tippy('#p1-complain-btn', {
-    content: 'P1 Complain',
-    })
-    tippy('#p2-complain-btn', {
-    content: "P2 Complain",
-    })
+
+    updateTooltips(activePlayer);
+
+
 
     // ====================== ENABLING BUTTONS ===================== //
 
