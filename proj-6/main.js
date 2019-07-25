@@ -5,8 +5,7 @@
 
 // --- Focus on this --- //
 
-* DO :hover !!! when user hovers over give or complain - explain what the button will do. ex. "-10 sad points to player1 (aka other player)")
-
+* Make player pick up a gift by passing through it.
 
 // --- For Further Study -- //
 
@@ -16,17 +15,16 @@
 
 // ------- Possible Updates ------- //
 
-* Make player pick up a gift by passing through it.
-
 * opening screen, giving mode screen (with Round: 1!) and end screen
 
 * Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
 * If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
 * Make code modular (in other .js files) -> see line 30
+* Put styles directly into css and activate using jQuery .css, .addClass and .removeClass
 
 
 // ------ Bug Reports ------ //
-* It is possible for both players to spawn on the same exact tile, or on adjacent tiles!
+* It is possible for both players to spawn on the same tile, or on adjacent tiles!
 
 */
 
@@ -381,7 +379,7 @@ $(function() {
   }
 
 
-  let givingMode = {
+  let givingModeInfo = {
     round: 0
   };
 
