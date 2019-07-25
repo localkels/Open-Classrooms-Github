@@ -1072,6 +1072,11 @@ $(function() {
   }
 
   function enableUiButtons(activePlayer) {
+    // --------- Adding tooltips with tippy.js ------- //
+
+    tippy('button', {
+    content: 'Tooltip',
+    })
 
     // ====================== ENABLING BUTTONS ===================== //
 
