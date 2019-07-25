@@ -52,11 +52,12 @@ $(function() {
   const complainButtonP2 = $('#p2-complain-btn')[0];
 
   // Instances for tippy.js
-  const p1GiveTippy = tippy('#p1-give-btn');
-  const p2GiveTippy = tippy('#p2-give-btn');
+  // const p1GiveTippy = tippy('#p1-give-btn');
+  // const p2GiveTippy = tippy('#p2-give-btn');
+  //
+  // const p1ComplainTippy = tippy('#p1-complain-btn');
+  // const p2ComplainTippy = tippy('#p2-complain-btn');
 
-  const p1ComplainTippy = tippy('#p1-complain-btn');
-  const p2ComplainTippy = tippy('#p2-complain-btn');
 
 
   let newDiv;
@@ -968,6 +969,172 @@ $(function() {
   // ========================================= HIGHLIGHTING & UI =========================================== //
   // ======================================================================================================= //
 
+  function generateTooltipText(isHoverOnGive) {
+    // console.log('running generateTooltipText()');
+
+    // See if you can put what will happen to their sadPoints if they choose the particular button.
+    // See if I can apply css styles to tooltip to align text left.
+
+    let tooltipText;
+
+    if (activePlayer === player1 && isHoverOnGive) {
+
+      tooltipText = "<strong><em>-" + player1.giftStrength + " SP</em></strong> for Player2."
+
+    } else if (activePlayer === player1 && !isHoverOnGive) {
+
+      tooltipText = "If Player2 gives, you will only lose <strong><em>" + (player2.giftStrength / 2) + " SP</em></strong> (not " + player2.giftStrength + ")."
+
+    } else if (activePlayer === player2 && isHoverOnGive) {
+
+      tooltipText = "<strong><em>-" + player2.giftStrength + " SP</em></strong> for Player1."
+
+    } else if (activePlayer === player2 && !isHoverOnGive) {
+
+      tooltipText = "If Player1 gives, you will only lose <strong><em>" + (player1.giftStrength / 2) + " SP</em></strong> (not " + player1.giftStrength + ")."
+
+    }
+
+    console.log(tooltipText);
+    return tooltipText;
+
+
+  }
+
+  function updateTooltips(activePlayer) {
+    // console.log("Run updateTooltips()");
+
+
+
+
+  }
+
+  function enableUiButtons(activePlayer) {
+    // --------- Adding tooltips with tippy.js ------- //
+
+
+    tippy.setDefaults({
+      placement: "bottom-start",
+      size: "small",
+      maxWidth: 95,
+      arrow: true,
+      animation: 'fade',
+      duration: 100,
+      interactiveBorder: 1,
+      showOnInit: true,
+      theme: "light",
+
+    })
+
+
+    if (activePlayer === player1) {
+      tippy('#p1-give-btn', {
+        content: generateTooltipText(true)
+      });
+
+      tippy('#p1-complain-btn', {
+        content: generateTooltipText(false)
+      });
+
+    } else {
+      tippy('#p2-give-btn', {
+        content: generateTooltipText(true)
+      });
+      tippy('#p2-complain-btn', {
+        content: generateTooltipText(false)
+      });
+
+    }
+
+
+    // updateTooltips(activePlayer);
+
+
+
+    // ====================== ENABLING BUTTONS ===================== //
+
+    if (activePlayer === player1) {
+      giveButtonP1.disabled = false;
+      complainButtonP1.disabled = false;
+
+      giveButtonP2.disabled = true;
+      complainButtonP2.disabled = true;
+
+
+
+      if (false === isFirstGivingRound) {
+        giveButtonP2.removeEventListener('click', playerGive);
+        complainButtonP2.removeEventListener('click', playerComplain);
+      }
+
+      giveButtonP1.addEventListener('click', playerGive);
+      complainButtonP1.addEventListener('click', playerComplain);
+
+      // addEventListener('mouseover', highlight);
+
+    } else {
+      giveButtonP2.disabled = false;
+      complainButtonP2.disabled = false;
+
+      giveButtonP1.disabled = true;
+      complainButtonP1.disabled = true;
+
+      if (false === isFirstGivingRound) {
+      giveButtonP1.removeEventListener('click', playerGive);
+      complainButtonP1.removeEventListener('click', playerComplain);
+    }
+
+      giveButtonP2.addEventListener('click', playerGive);
+      complainButtonP2.addEventListener('click', playerComplain);
+    }
+
+  }
+
+  function givingToggleAndUpdateUi() {
+
+    toggleTurns();
+    enableUiButtons(activePlayer);
+    updateUi();
+
+  }
+
+  function playerGive() {
+    activePlayer.give();
+
+    givingToggleAndUpdateUi();
+
+  }
+
+  function playerComplain() {
+    activePlayer.complain();
+
+    givingToggleAndUpdateUi();
+
+  }
+
+
+  function highlight(event) {
+    event.target.style.backgroundColor = highlightedBackground;
+  }
+
+
+  function dehighlight(event) {
+    event.target.style.backgroundColor = possibleMovesBackground;
+  }
+
+  // ===================================================================================================== //
+  // ============================================ POSITIONING ============================================ //
+  // ===================================================================================================== //
+
+  function getObstaclePositions() {
+
+    for (let i = 0; i < NUM_OBSTACLES; i++) {
+      obstaclesX.push(getRandomX())
+      obstaclesY.push(getRandomY())
+    }
+
+  }
+
   function updateUi() {
 
     // SAD POINTS
@@ -1079,173 +1246,7 @@ $(function() {
     }
   }
 
-  function generateTooltipText(isHoverOnGive) {
-    console.log('running generateTooltipText()');
 
-    // See if you can put what will happen to their sadPoints if they choose the particular button.
-    // See if I can apply css styles to tooltip to align text left.
-
-    let tooltipText;
-
-    if (activePlayer === player1 && isHoverOnGive) {
-      // tooltipText = "Subtract <em>" + activePlayer.giftStrength + "</em> sad points from Player2 at the end of this round."
-      // tooltipText = "Player1 <br />-" + player1.giftStrength;
-      // tooltipText = "P"+ activePlayer.nr + " chose give";
-      tooltipText = "Player1's GiftType: " + player1.giftType + " CHOSE GIVE";
-
-      // Something's wrong with the logic of the complain button text
-    } else if (activePlayer === player1 && !isHoverOnGive) {
-      // tooltipText = "Player2 can only subtract <em>" + (player2.giftStrength / 2) + "</em> sad points from you at the end of this round. (Instead of " + player2.giftStrength + " sadPoints)"
-      // tooltipText = "Player2 <br />-" + (player2.giftStrength / 2)
-      // tooltipText = "P" + activePlayer.nr + " chose complain";
-      tooltipText = "Player1's GiftType: " + player1.giftType + " CHOSE COMPLAIN";
-
-    } else if (activePlayer === player2 && isHoverOnGive) {
-      // tooltipText = "Subtract <em>" + activePlayer.giftStrength + "</em> sad points from Player2 at the end of this round."
-      // tooltipText = "Player1 <br />-" + player2.giftStrength;
-      // tooltipText = "P"+ activePlayer.nr + " chose give";
-      tooltipText = "Player2's GiftType: " + player2.giftType + " CHOSE GIVE";
-
-
-      // Something's wrong with the logic of the complain button text.
-    } else if (activePlayer === player2 && !isHoverOnGive) {
-      // tooltipText = "Player1 can only subtract <em>" + (player1.giftStrength / 2) + "</em> sad points from you at the end of this round. (Instead of " + player1.giftStrength + " sadPoints) (Player2 sadPoints: - " + (player1.giftStrength / 2) + ")"
-      // tooltipText = "Player2 <br />-" + (player1.giftStrength / 2);
-      // tooltipText = "P" + activePlayer.nr + " chose complain";
-      tooltipText = "Player2's GiftType: " + player2.giftType + " CHOSE COMPLAIN";
-    }
-
-    console.log(tooltipText);
-    return tooltipText;
-
-
-  }
-
-  function updateTooltips(activePlayer) {
-    console.log("Run updateTooltips()");
-
-    if (activePlayer === player1) {
-      p1GiveTippy.set({
-        content: generateTooltipText(true)
-      })
-
-      p1ComplainTippy.set({
-        content: generateTooltipText(false)
-      })
-
-    } else {
-      p2GiveTippy.set({
-        content: generateTooltipText(true)
-      })
-      p2ComplainTippy.set({
-        content: generateTooltipText(false)
-      })
-
-    }
-
-
-  }
-
-  function enableUiButtons(activePlayer) {
-    // --------- Adding tooltips with tippy.js ------- //
-
-
-    tippy.setDefaults({
-      placement: "bottom-start",
-      size: "small",
-      maxWidth: 150,
-      arrow: true,
-      content: "Loading..."
-    })
-
-
-    updateTooltips(activePlayer);
-
-
-
-    // ====================== ENABLING BUTTONS ===================== //
-
-    if (activePlayer === player1) {
-      giveButtonP1.disabled = false;
-      complainButtonP1.disabled = false;
-
-      giveButtonP2.disabled = true;
-      complainButtonP2.disabled = true;
-
-
-
-      if (false === isFirstGivingRound) {
-        giveButtonP2.removeEventListener('click', playerGive);
-        complainButtonP2.removeEventListener('click', playerComplain);
-      }
-
-      giveButtonP1.addEventListener('click', playerGive);
-      complainButtonP1.addEventListener('click', playerComplain);
-
-      // addEventListener('mouseover', highlight);
-
-    } else {
-      giveButtonP2.disabled = false;
-      complainButtonP2.disabled = false;
-
-      giveButtonP1.disabled = true;
-      complainButtonP1.disabled = true;
-
-      if (false === isFirstGivingRound) {
-      giveButtonP1.removeEventListener('click', playerGive);
-      complainButtonP1.removeEventListener('click', playerComplain);
-    }
-
-      giveButtonP2.addEventListener('click', playerGive);
-      complainButtonP2.addEventListener('click', playerComplain);
-    }
-
-  }
-
-  function givingToggleAndUpdateUi() {
-
-    toggleTurns();
-    enableUiButtons(activePlayer);
-    updateUi();
-
-  }
-
-  function playerGive() {
-    activePlayer.give();
-
-    givingToggleAndUpdateUi();
-
-  }
-
-  function playerComplain() {
-    activePlayer.complain();
-
-    givingToggleAndUpdateUi();
-
-  }
-
-
-  function highlight(event) {
-    event.target.style.backgroundColor = highlightedBackground;
-  }
-
-
-  function dehighlight(event) {
-    event.target.style.backgroundColor = possibleMovesBackground;
-  }
-
-  // ===================================================================================================== //
-  // ============================================ POSITIONING ============================================ //
-  // ===================================================================================================== //
-
-  function getObstaclePositions() {
-
-    for (let i = 0; i < NUM_OBSTACLES; i++) {
-      obstaclesX.push(getRandomX())
-      obstaclesY.push(getRandomY())
-    }
-
-  }
 
   function getGiftPositions() {
 
