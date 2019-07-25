@@ -1074,8 +1074,23 @@ $(function() {
   function enableUiButtons(activePlayer) {
     // --------- Adding tooltips with tippy.js ------- //
 
-    tippy('button', {
-    content: 'Tooltip',
+    let tooltipText = "P2 Complain";
+    
+    tippy.setDefaults({
+
+    })
+
+    tippy('#p1-give-btn', {
+    content: 'P1 Give',
+    })
+    tippy('#p2-give-btn', {
+    content: 'P2 Give',
+    })
+    tippy('#p1-complain-btn', {
+    content: 'P1 Complain',
+    })
+    tippy('#p2-complain-btn', {
+    content: tooltipText,
     })
 
     // ====================== ENABLING BUTTONS ===================== //
