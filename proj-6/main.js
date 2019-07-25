@@ -1071,11 +1071,34 @@ $(function() {
     }
   }
 
+  function generateTooltipText(isHoverOnGive) {
+    let tooltipText;
+
+    if (activePlayer === player1 && isHoverOnGive) {
+      tooltipText = "Subtract <em>" + active.giftStrength + "</em> sad points from Player2 at the end of the current round."
+      console.log(tooltipText);
+
+      // Something's wrong with the logic of the complain button text
+    } else if (activePlayer === player1 && !isHoverOnGive) {
+      tooltipText = "Player2 can only subtract <em>" + (player2.giftStrength / 2) + "</em> sad points from you at the end of the current round. (Instead of " + player2.giftStrength + " sadPoints)"
+
+    } else if (activePlayer === player2 && isHoverOnGive) {
+      tooltipText = "Subtract <em>" + activePlayer.giftStrength + "</em> sad points from Player2 at the end of the current round."
+
+      // Something's wrong with the logic of the complain button text.
+    } else if (activePlayer === player2 && !isHoverOnGive) {
+      tooltipText = "Player1 can only subtract <em>" + (player1.giftStrength / 2) + "</em> sad points from you at the end of the current round. (Instead of " + player1.giftStrength + " sadPoints)"
+    }
+
+    return tooltipText;
+
+
+  }
+
   function enableUiButtons(activePlayer) {
     // --------- Adding tooltips with tippy.js ------- //
 
-    let tooltipText = "P2 Complain";
-    
+
     tippy.setDefaults({
 
     })
@@ -1090,7 +1113,7 @@ $(function() {
     content: 'P1 Complain',
     })
     tippy('#p2-complain-btn', {
-    content: tooltipText,
+    content: "P2 Complain",
     })
 
     // ====================== ENABLING BUTTONS ===================== //
