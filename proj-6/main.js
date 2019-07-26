@@ -6,6 +6,8 @@
 // --- Focus on this --- //
 
 * Make player pick up a gift by passing through it.
+  * Fix bugs: doesn't work when passing from left to right, gift is not picked up correctly and previous gift is not dropped correctly.
+
 
 // --- For Further Study -- //
 
@@ -26,6 +28,7 @@
 
 // ------ Bug Reports ------ //
 * It is possible for both players to spawn on the same tile, or on adjacent tiles!
+* If two gifts are on adjacent tiles, it is possible for player to click on one gift and pick up the other, because of didPlayerPassGift();
 
 */
 
@@ -92,10 +95,10 @@ $(function() {
       });
 
   // Create global variables for objects.
-  let giftSM;
-  let giftMD;
-  let giftLG;
-  let giftXL;
+  let gift1;
+  let gift2;
+  let gift3;
+  let gift4;
 
   let player1;
   let player2;
@@ -176,32 +179,32 @@ $(function() {
         if (this.prevGiftType === "xs") {
 
         } else if (this.prevGiftType === "sm") {
-          giftSM.x = this.x;
-          giftSM.y = this.y;
+          gift1.x = this.x;
+          gift1.y = this.y;
 
-          // console.log('giftSM hidden = false');
-          giftSM.hidden = false;
+          // console.log('gift1 hidden = false');
+          gift1.hidden = false;
 
         } else if (this.prevGiftType === "md") {
-          giftMD.x = this.x;
-          giftMD.y = this.y;
+          gift2.x = this.x;
+          gift2.y = this.y;
 
-          // console.log('giftMD hidden = false');
-          giftMD.hidden = false;
+          // console.log('gift2 hidden = false');
+          gift2.hidden = false;
 
         } else if (this.prevGiftType === "lg") {
-          giftLG.x = this.x;
-          giftLG.y = this.y;
+          gift3.x = this.x;
+          gift3.y = this.y;
 
-          // console.log('giftLG hidden = false');
-          giftLG.hidden = false;
+          // console.log('gift3 hidden = false');
+          gift3.hidden = false;
 
         } else if (this.prevGiftType === "xl") {
-          giftXL.x = this.x;
-          giftXL.y = this.y;
+          gift4.x = this.x;
+          gift4.y = this.y;
 
-          // console.log('giftXL hidden = false');
-          giftXL.hidden = false;
+          // console.log('gift4 hidden = false');
+          gift4.hidden = false;
 
         }
 
@@ -329,7 +332,7 @@ $(function() {
             this.activeTile.style = smGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              giftSM.activeTile.style.backgroundColor = possibleMovesBackground;
+              gift1.activeTile.style.backgroundColor = possibleMovesBackground;
 
 
             }
@@ -337,21 +340,21 @@ $(function() {
             this.activeTile.style = mdGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              giftMD.activeTile.style.backgroundColor = possibleMovesBackground;
+              gift2.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           } else if (this.giftType === 'lg') {
             this.activeTile.style = lgGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              giftLG.activeTile.style.backgroundColor = possibleMovesBackground;
+              gift3.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           } else if (this.giftType === 'xl') {
             this.activeTile.style = xlGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
               // Change background color to correct color (see highlight and refreshGrid)
-              giftXL.activeTile.style.backgroundColor = possibleMovesBackground;
+              gift4.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           }
@@ -390,21 +393,74 @@ $(function() {
 
   function didPlayerPassGift(activePlayer) {
     // console.log("Run didPlayerPassGift()");
-    console.log("activePlayer's X: " + activePlayer.x);
+    // console.log("activePlayer's X: " + activePlayer.x);
 
-    // check if player has same X
+    // console.log("checking if player has same X");
     for (var i = 0; i < giftsX.length; i++) {
+      if (activePlayer.x === giftsX[i] && activePlayer.prevX === giftsX[i]) {
 
+        //Find out if player did pass over gift
+        if ((activePlayer.prevY > giftsY[i] && activePlayer.y < giftsY[i]) || (activePlayer.prevY < giftsY[i] && activePlayer.y > giftsY[i])) {
+          // console.log("Player" + activePlayer.nr + " has same X as gift" + (i + 1) + " and has passed over it.");
 
-      if (activePlayer.x === giftsX[i]) {
-        console.log("Player" + activePlayer.nr + " has same X as gift" + (i + 1) + ".");
+          // Identify and add to player the correct gift.
+          if (i + 1 === 1) {
+            // giftWithSameX = gift1;
+            addGiftToPlayer('sm');
+            activePlayer.drop();
+            // activePlayer.giftType = 'sm';
+          } else if (i + 1 === 2) {
+            // giftWithSameX = gift2;
+            addGiftToPlayer('md');
+            activePlayer.drop();
+          } else if (i + 1 === 3) {
+            addGiftToPlayer('lg');
+            activePlayer.drop();
+            // giftWithSameX = gift3;
+          } else if (i + 1 === 4) {
+            addGiftToPlayer('xl');
+            activePlayer.drop();
+            // giftWithSameX = gift4;
 
-
+          }
+        }
       }
-
-
     }
 
+
+    for (var i = 0; i < giftsY.length; i++) {
+      console.log("checking if player has same Y");
+      if (activePlayer.y === giftsY[i] && activePlayer.prevY === giftsY[i]) {
+        console.log("Player has remained at the same Y!!!!!!");
+
+
+        //Find out if player did pass over gift
+        if ((activePlayer.prevX > giftsX[i] && activePlayer.x < giftsX[i]) || (activePlayer.prevX < giftsX[i] && activePlayer.x > giftsX[i])) {
+          console.log("Player" + activePlayer.nr + " has same Y as gift" + (i + 1) + " and has passed over it.");
+
+          // Identify and add to player the correct gift.
+          if (i + 1 === 1) {
+            // giftWithSameX = gift1;
+            addGiftToPlayer('sm');
+            activePlayer.drop();
+            // activePlayer.giftType = 'sm';
+          } else if (i + 1 === 2) {
+            // giftWithSameX = gift2;
+            addGiftToPlayer('md');
+            activePlayer.drop();
+          } else if (i + 1 === 3) {
+            addGiftToPlayer('lg');
+            activePlayer.drop();
+            // giftWithSameX = gift3;
+          } else if (i + 1 === 4) {
+            addGiftToPlayer('xl');
+            activePlayer.drop();
+            // giftWithSameX = gift4;
+
+          }
+        }
+      }
+    }
 
 
 
@@ -498,8 +554,8 @@ $(function() {
 
     function roundChange() {
       // console.log("Running roundChange()");
-        givingMode.round += 1;
-        console.log("Round " + givingMode.round);
+        givingModeInfo.round += 1;
+        console.log("Round " + givingModeInfo.round);
 
         // Based on each player's choice (fightState), run function that subtracts from each player's sadPoints.
         subtractSadPoints();
@@ -624,14 +680,14 @@ $(function() {
 
 
     // Gifts being created
-    giftSM = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
-    giftSM.stylize();
-    giftMD = new Gift('md', GiftStrengthAmount.MD, giftsX[1], giftsY[1]);
-    giftMD.stylize();
-    giftLG = new Gift('lg', GiftStrengthAmount.LG, giftsX[2], giftsY[2]);
-    giftLG.stylize();
-    giftXL = new Gift('xl', GiftStrengthAmount.XL, giftsX[3], giftsY[3]);
-    giftXL.stylize();
+    gift1 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
+    gift1.stylize();
+    gift2 = new Gift('md', GiftStrengthAmount.MD, giftsX[1], giftsY[1]);
+    gift2.stylize();
+    gift3 = new Gift('lg', GiftStrengthAmount.LG, giftsX[2], giftsY[2]);
+    gift3.stylize();
+    gift4 = new Gift('xl', GiftStrengthAmount.XL, giftsX[3], giftsY[3]);
+    gift4.stylize();
 
     getPlayerPositions();
 
@@ -665,7 +721,7 @@ $(function() {
     // Enables "give" and "complain" buttons
     enableUiButtons(activePlayer);
 
-    console.log("Round " + givingMode.round);
+    console.log("Round " + givingModeInfo.round);
 
     // Giving/Complaining needs to take place here.
 
@@ -715,6 +771,8 @@ $(function() {
       // checkForPlayerAdjacent();
 
 
+
+
       // ================================== CHECKING FOR CLICKED GIFT ===================================== //
 
       let clickedGiftType = getGiftAtClick(event, true);
@@ -745,6 +803,8 @@ $(function() {
 
       didPlayerPassGift(activePlayer);
 
+
+
       toggleTurns();
 
       refreshGrid();
@@ -773,43 +833,43 @@ $(function() {
 
   function getGiftAtClick(event, hideGift) {
 
-    if (false === giftSM.hidden && xCalc(event.clientX) === giftSM.x && yCalc(event.clientY) === giftSM.y) {
+    if (false === gift1.hidden && xCalc(event.clientX) === gift1.x && yCalc(event.clientY) === gift1.y) {
 
       if (true === hideGift) {
-        giftSM.hidden = true;
+        gift1.hidden = true;
 
       }
-      return giftSM.giftType;
+      return gift1.giftType;
 
-    } else if (false === giftMD.hidden && xCalc(event.clientX) === giftMD.x && yCalc(event.clientY) === giftMD.y) {
+    } else if (false === gift2.hidden && xCalc(event.clientX) === gift2.x && yCalc(event.clientY) === gift2.y) {
       if (true === hideGift) {
-        giftMD.hidden = true;
-
-      }
-
-      return giftMD.giftType;
-
-    } else if (false === giftLG.hidden && xCalc(event.clientX) === giftLG.x && yCalc(event.clientY) === giftLG.y) {
-
-      if (true === hideGift) {
-        giftLG.hidden = true;
+        gift2.hidden = true;
 
       }
 
-      return giftLG.giftType;
+      return gift2.giftType;
 
-    } else if (false === giftXL.hidden && xCalc(event.clientX) === giftXL.x && yCalc(event.clientY) === giftXL.y) {
+    } else if (false === gift3.hidden && xCalc(event.clientX) === gift3.x && yCalc(event.clientY) === gift3.y) {
 
-      // console.log('you clicked on giftXL');
+      if (true === hideGift) {
+        gift3.hidden = true;
+
+      }
+
+      return gift3.giftType;
+
+    } else if (false === gift4.hidden && xCalc(event.clientX) === gift4.x && yCalc(event.clientY) === gift4.y) {
+
+      // console.log('you clicked on gift4');
 
       // console.log('activePlayer: '+ activePlayer + ' | giftType: ' + activePlayer.giftType);
 
       if (true === hideGift) {
-        giftXL.hidden = true;
+        gift4.hidden = true;
 
       }
 
-      return giftXL.giftType;
+      return gift4.giftType;
     }
 
     return false;
@@ -818,7 +878,7 @@ $(function() {
 
   function addGiftToPlayer(giftType) {
     // console.log('addGiftToPlayer()');
-    console.log('giftType= ' + giftType);
+    // console.log('giftType= ' + giftType);
 
     // When this is called, it seems activePlayer has already been sure.
     if (activePlayer === player1) {
@@ -828,20 +888,24 @@ $(function() {
       player1.giftType = giftType;
       // Adjust player's giftStrength accordingly.
       if (giftType === 'sm') {
-        console.log("You picked up a sm gift");
+        // console.log("You picked up a sm gift");
         player1.giftStrength = GiftStrengthAmount.SM;
+        gift1.hidden = true;
 
       } else if (giftType === 'md') {
-        console.log("You picked up an md gift");
+        // console.log("You picked up an md gift");
         player1.giftStrength = GiftStrengthAmount.MD;
+        gift2.hidden = true;
 
       } else if (giftType === 'lg') {
-        console.log("You picked up a lg gift");
+        // console.log("You picked up a lg gift");
         player1.giftStrength = GiftStrengthAmount.LG;
+        gift3.hidden = true;
 
       } else if (giftType === 'xl') {
-        console.log("You picked up an xl gift");
+        // console.log("You picked up an xl gift");
         player1.giftStrength = GiftStrengthAmount.XL;
+        gift4.hidden = true;
 
       }
 
@@ -851,24 +915,28 @@ $(function() {
       // New giftType added
       player2.giftType = giftType;
       if (giftType === 'sm') {
-        console.log("You picked up a sm gift");
+        // console.log("You picked up a sm gift");
         player2.giftStrength = GiftStrengthAmount.SM;
+        gift1.hidden = true;
 
       } else if (giftType === 'md') {
-        console.log("You picked up an md gift");
+        // console.log("You picked up an md gift");
         player2.giftStrength = GiftStrengthAmount.MD;
+        gift2.hidden = true;
 
       } else if (giftType === 'lg') {
-        console.log("You picked up a lg gift");
+        // console.log("You picked up a lg gift");
         player2.giftStrength = GiftStrengthAmount.LG;
+        gift3.hidden = true;
 
       } else if (giftType === 'xl') {
-        console.log("You picked up an xl gift");
+        // console.log("You picked up an xl gift");
         player2.giftStrength = GiftStrengthAmount.XL;
+        gift4.hidden = true;
 
       }
     }
-    console.log(activePlayer.giftStrength);
+    // console.log(activePlayer.giftStrength);
   }
 
 
@@ -1014,7 +1082,7 @@ $(function() {
 
     }
 
-    console.log(tooltipText);
+    // console.log(tooltipText);
     return tooltipText;
 
 
@@ -1319,25 +1387,25 @@ $(function() {
         }
       }
 
-      if (randomPlayerX === giftSM.x && randomPlayerY === giftSM.y) {
+      if (randomPlayerX === gift1.x && randomPlayerY === gift1.y) {
         getPlayerPositions();
         return;
 
       }
 
-      if (randomPlayerX === giftMD.x && randomPlayerY === giftMD.y) {
+      if (randomPlayerX === gift2.x && randomPlayerY === gift2.y) {
         getPlayerPositions();
         return;
 
       }
 
-      if (randomPlayerX === giftLG.x && randomPlayerY === giftLG.y) {
+      if (randomPlayerX === gift3.x && randomPlayerY === gift3.y) {
         getPlayerPositions();
         return;
 
       }
 
-      if (randomPlayerX === giftXL.x && randomPlayerY === giftXL.y) {
+      if (randomPlayerX === gift4.x && randomPlayerY === gift4.y) {
         getPlayerPositions();
         return;
 
@@ -1409,10 +1477,10 @@ $(function() {
     }
 
     // Add gift, player and obstacle styles
-    giftSM.stylize();
-    giftMD.stylize();
-    giftLG.stylize();
-    giftXL.stylize();
+    gift1.stylize();
+    gift2.stylize();
+    gift3.stylize();
+    gift4.stylize();
 
     player1.stylize();
     player2.stylize();
@@ -1433,10 +1501,10 @@ $(function() {
     drawGrid();
 
     // Add gift, player and obstacle styles
-    giftSM.stylize();
-    giftMD.stylize();
-    giftLG.stylize();
-    giftXL.stylize();
+    gift1.stylize();
+    gift2.stylize();
+    gift3.stylize();
+    gift4.stylize();
 
 
     // Change styling of ALL other tiles, except for players
