@@ -5,9 +5,7 @@
 
 // --- Focus on this --- //
 
-* Make player pick up a gift by passing through it.
-  * Fix bugs: doesn't work when passing from left to right, gift is not picked up correctly and previous gift is not dropped correctly.
-
+* Implement an actual default weapon that is dropped when they pick up their first weapon. * Make code modular (in other .js files)
 
 // --- For Further Study -- //
 
