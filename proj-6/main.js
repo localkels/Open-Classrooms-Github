@@ -5,7 +5,7 @@
 
 // --- Focus on this --- //
 
-* Implement an actual default weapon that is dropped when they pick up their first weapon. * Make code modular (in other .js files)
+* Implement an actual default weapon that is dropped when they pick up their first weapon.
 
 // --- For Further Study -- //
 
@@ -93,6 +93,7 @@ $(function() {
       });
 
   // Create global variables for objects.
+  let gift0;
   let gift1;
   let gift2;
   let gift3;
@@ -145,6 +146,8 @@ $(function() {
 
   ////////////////   GIFT STYLES  ////////////////
 
+  let xsGiftStyles = 'background-image: url("/assets/cross.png"); background-color: springgreen; background-size: 30px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
+
   let smGiftStyles = 'background-image: url("/assets/sm.png"); background-color: springgreen; background-size: 30px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
   let mdGiftStyles = 'background-image: url("/assets/md.png"); background-color: springgreen; background-size: 17px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
@@ -175,6 +178,15 @@ $(function() {
       this.fightState = PlayerFightState.EMPTY;
       this.drop = function() {
         if (this.prevGiftType === "xs") {
+          console.log("dropping Gift0");
+          gift0.stylize();
+          // gift0 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
+          gift0.x = this.x;
+          gift0.y = this.y;
+
+          // console.log('gift1 hidden = false');
+          gift0.hidden = false;
+
 
         } else if (this.prevGiftType === "sm") {
           gift1.x = this.x;
@@ -326,10 +338,16 @@ $(function() {
         if (this.hidden === false) {
           this.activeTile = gridRows[this.y].children[this.x];
 
-          if (this.giftType === 'sm') {
+          if (this.giftType === 'xs') {
+            this.activeTile.style = xsGiftStyles;
+            if (isGiftOnPossibleMove(this.giftType)) {
+              gift0.activeTile.style.backgroundColor = possibleMovesBackground;
+
+
+            }
+          } else if (this.giftType === 'sm') {
             this.activeTile.style = smGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
-              // Change background color to correct color (see highlight and refreshGrid)
               gift1.activeTile.style.backgroundColor = possibleMovesBackground;
 
 
@@ -337,21 +355,18 @@ $(function() {
           } else if (this.giftType === 'md') {
             this.activeTile.style = mdGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
-              // Change background color to correct color (see highlight and refreshGrid)
               gift2.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           } else if (this.giftType === 'lg') {
             this.activeTile.style = lgGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
-              // Change background color to correct color (see highlight and refreshGrid)
               gift3.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
           } else if (this.giftType === 'xl') {
             this.activeTile.style = xlGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
-              // Change background color to correct color (see highlight and refreshGrid)
               gift4.activeTile.style.backgroundColor = possibleMovesBackground;
 
             }
@@ -427,14 +442,14 @@ $(function() {
 
 
     for (var i = 0; i < giftsY.length; i++) {
-      console.log("checking if player has same Y");
+      // console.log("checking if player has same Y");
       if (activePlayer.y === giftsY[i] && activePlayer.prevY === giftsY[i]) {
-        console.log("Player has remained at the same Y!!!!!!");
+        // console.log("Player has remained at the same Y!!!!!!");
 
 
         //Find out if player did pass over gift
         if ((activePlayer.prevX > giftsX[i] && activePlayer.x < giftsX[i]) || (activePlayer.prevX < giftsX[i] && activePlayer.x > giftsX[i])) {
-          console.log("Player" + activePlayer.nr + " has same Y as gift" + (i + 1) + " and has passed over it.");
+          // console.log("Player" + activePlayer.nr + " has same Y as gift" + (i + 1) + " and has passed over it.");
 
           // Identify and add to player the correct gift.
           if (i + 1 === 1) {
@@ -470,7 +485,18 @@ $(function() {
 
     function isGiftOnPossibleMove(giftType) {
 
-      if (giftType === 'sm') {
+      if (giftType === 'xs') {
+        for (let i = 0; i < possibleMoves.length; i++) {
+          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+          if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
+
+            return true;
+
+          }
+        }
+      } else if (giftType === 'sm') {
         for (let i = 0; i < possibleMoves.length; i++) {
           let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
           let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
@@ -677,7 +703,11 @@ $(function() {
     getGiftPositions();
 
 
+    gift0 = new Gift('xs', GiftStrengthAmount.XS, 0, 0);
+    gift0.hidden = true;
+    gift0.stylize();
     // Gifts being created
+
     gift1 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
     gift1.stylize();
     gift2 = new Gift('md', GiftStrengthAmount.MD, giftsX[1], giftsY[1]);
@@ -772,6 +802,7 @@ $(function() {
 
 
       // ================================== CHECKING FOR CLICKED GIFT ===================================== //
+      // MAKE THIS A SEPARATE FUNCTION!!!
 
       let clickedGiftType = getGiftAtClick(event, true);
 
@@ -831,7 +862,15 @@ $(function() {
 
   function getGiftAtClick(event, hideGift) {
 
-    if (false === gift1.hidden && xCalc(event.clientX) === gift1.x && yCalc(event.clientY) === gift1.y) {
+    if (false === gift0.hidden && xCalc(event.clientX) === gift0.x && yCalc(event.clientY) === gift0.y) {
+
+      if (true === hideGift) {
+        gift0.hidden = true;
+
+      }
+      return gift0.giftType;
+
+    } else if (false === gift1.hidden && xCalc(event.clientX) === gift1.x && yCalc(event.clientY) === gift1.y) {
 
       if (true === hideGift) {
         gift1.hidden = true;
@@ -1385,6 +1424,12 @@ $(function() {
         }
       }
 
+      if (randomPlayerX === gift0.x && randomPlayerY === gift0.y) {
+        getPlayerPositions();
+        return;
+
+      }
+
       if (randomPlayerX === gift1.x && randomPlayerY === gift1.y) {
         getPlayerPositions();
         return;
@@ -1475,6 +1520,7 @@ $(function() {
     }
 
     // Add gift, player and obstacle styles
+    gift0.stylize();
     gift1.stylize();
     gift2.stylize();
     gift3.stylize();
@@ -1499,6 +1545,7 @@ $(function() {
     drawGrid();
 
     // Add gift, player and obstacle styles
+    gift0.stylize();
     gift1.stylize();
     gift2.stylize();
     gift3.stylize();
