@@ -25,8 +25,10 @@
 
 
 // ------ Bug Reports ------ //
+* XS gift does not get highlight color until hoved over.
 * It is possible for both players to spawn on the same tile, or on adjacent tiles!
 * If two gifts are on adjacent tiles, it is possible for player to click on one gift and pick up the other, because of didPlayerPassGift();
+
 
 */
 
@@ -93,7 +95,8 @@ $(function() {
       });
 
   // Create global variables for objects.
-  let gift0;
+  let giftPlayer1;
+  let giftPlayer2;
   let gift1;
   let gift2;
   let gift3;
@@ -172,20 +175,31 @@ $(function() {
       this.sadPoints = sadPoints;
       this.giftType = giftType;
       this.giftStrength = giftStrength; // better gifts take away more sadPoints
-      this.prevGiftType = 'xs';
+      this.prevGiftType = 'xs-p1';
       this.prevX = x;
       this.prevY = y;
       this.fightState = PlayerFightState.EMPTY;
       this.drop = function() {
-        if (this.prevGiftType === "xs") {
-          console.log("dropping Gift0");
-          gift0.stylize();
-          // gift0 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
-          gift0.x = this.x;
-          gift0.y = this.y;
+        if (this.prevGiftType === "xs-p1") {
+          console.log("dropping giftPlayer1");
+          giftPlayer1.stylize();
+          // giftPlayer1 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
+          giftPlayer1.x = this.x;
+          giftPlayer1.y = this.y;
 
           // console.log('gift1 hidden = false');
-          gift0.hidden = false;
+          giftPlayer1.hidden = false;
+
+
+        } else if (this.prevGiftType === "xs-p2") {
+          console.log("dropping giftPlayer2");
+          giftPlayer2.stylize();
+          // giftPlayer1 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
+          giftPlayer2.x = this.x;
+          giftPlayer2.y = this.y;
+
+          // console.log('gift1 hidden = false');
+          giftPlayer2.hidden = false;
 
 
         } else if (this.prevGiftType === "sm") {
@@ -338,10 +352,17 @@ $(function() {
         if (this.hidden === false) {
           this.activeTile = gridRows[this.y].children[this.x];
 
-          if (this.giftType === 'xs') {
+          if (this.giftType === 'xs-p1') {
             this.activeTile.style = xsGiftStyles;
             if (isGiftOnPossibleMove(this.giftType)) {
-              gift0.activeTile.style.backgroundColor = possibleMovesBackground;
+              giftPlayer1.activeTile.style.backgroundColor = possibleMovesBackground;
+
+
+            }
+          } else if (this.giftType === 'xs-p2') {
+            this.activeTile.style = xsGiftStyles;
+            if (isGiftOnPossibleMove(this.giftType)) {
+              giftPlayer2.activeTile.style.backgroundColor = possibleMovesBackground;
 
 
             }
@@ -485,7 +506,18 @@ $(function() {
 
     function isGiftOnPossibleMove(giftType) {
 
-      if (giftType === 'xs') {
+      if (giftType === 'xs-p1') {
+        for (let i = 0; i < possibleMoves.length; i++) {
+          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+          if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
+
+            return true;
+
+          }
+        }
+      } else if (giftType === 'xs-p2') {
         for (let i = 0; i < possibleMoves.length; i++) {
           let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
           let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
@@ -703,9 +735,14 @@ $(function() {
     getGiftPositions();
 
 
-    gift0 = new Gift('xs', GiftStrengthAmount.XS, 0, 0);
-    gift0.hidden = true;
-    gift0.stylize();
+    giftPlayer1 = new Gift('xs-p1', GiftStrengthAmount.XS, 0, 0);
+    giftPlayer1.hidden = true;
+    giftPlayer1.stylize();
+
+    giftPlayer2 = new Gift('xs-p2', GiftStrengthAmount.XS, 0, 0);
+    giftPlayer2.hidden = true;
+    // giftPlayer2.prevGiftType = 'xs-p2';
+    giftPlayer2.stylize();
     // Gifts being created
 
     gift1 = new Gift('sm', GiftStrengthAmount.SM, giftsX[0], giftsY[0]);
@@ -720,9 +757,10 @@ $(function() {
     getPlayerPositions();
 
     // Object params: Player(x, y, sadPoints, giftType, giftStrength)
-    player1 = new Player(1, playersX[0], playersY[0], 100, 'xs', GiftStrengthAmount.XS);
+    player1 = new Player(1, playersX[0], playersY[0], 100, 'xs-p1', GiftStrengthAmount.XS);
     player1.stylize();
-    player2 = new Player(2, playersX[1], playersY[1], 100, 'xs', GiftStrengthAmount.XS);
+    player2 = new Player(2, playersX[1], playersY[1], 100, 'xs-p2', GiftStrengthAmount.XS);
+    player2.prevGiftType = 'xs-p2';
     player2.stylize();
 
     // jQuery => .on()
@@ -810,15 +848,18 @@ $(function() {
         // console.log('you checked for a click on a gift');
 
         // Do something here to have player drop his original gift
-        if (activePlayer.giftType === 'xs') {
-          addGiftToPlayer(clickedGiftType);
-          activePlayer.drop();
+        // if (activePlayer.giftType === 'xs-p1') {
+        //   addGiftToPlayer(clickedGiftType);
+        //   activePlayer.drop();
+        //
+        // } else {
+        //   // swapGifts(clickedGiftType);
+        //   addGiftToPlayer(clickedGiftType);
+        //   activePlayer.drop();
+        // }
 
-        } else {
-          // swapGifts(clickedGiftType);
-          addGiftToPlayer(clickedGiftType);
-          activePlayer.drop();
-        }
+        addGiftToPlayer(clickedGiftType);
+        activePlayer.drop();
 
 
         if (activePlayer === player1) {
@@ -862,13 +903,21 @@ $(function() {
 
   function getGiftAtClick(event, hideGift) {
 
-    if (false === gift0.hidden && xCalc(event.clientX) === gift0.x && yCalc(event.clientY) === gift0.y) {
+    if (false === giftPlayer1.hidden && xCalc(event.clientX) === giftPlayer1.x && yCalc(event.clientY) === giftPlayer1.y) {
 
       if (true === hideGift) {
-        gift0.hidden = true;
+        giftPlayer1.hidden = true;
 
       }
-      return gift0.giftType;
+      return giftPlayer1.giftType;
+
+    } else if (false === giftPlayer2.hidden && xCalc(event.clientX) === giftPlayer2.x && yCalc(event.clientY) === giftPlayer2.y) {
+
+      if (true === hideGift) {
+        giftPlayer2.hidden = true;
+
+      }
+      return giftPlayer2.giftType;
 
     } else if (false === gift1.hidden && xCalc(event.clientX) === gift1.x && yCalc(event.clientY) === gift1.y) {
 
@@ -1270,7 +1319,7 @@ $(function() {
     // document.getElementById("gift-type-p2").innerHTML = player2.giftType + " gift";
 
 
-    if (player1.giftType === 'xs') {
+    if (player1.giftType === 'xs-p1') {
       // GIFT TYPE
       $("#gift-type-p1").html("Extra small<sup> gift</sup>");
 
@@ -1308,7 +1357,7 @@ $(function() {
     }
 
 
-    if (player2.giftType === 'xs') {
+    if (player2.giftType === 'xs-p2') {
       // GIFT TYPE
       $("#gift-type-p2").html("Extra small<sup> gift</sup>");
 
@@ -1424,7 +1473,13 @@ $(function() {
         }
       }
 
-      if (randomPlayerX === gift0.x && randomPlayerY === gift0.y) {
+      if (randomPlayerX === giftPlayer1.x && randomPlayerY === giftPlayer1.y) {
+        getPlayerPositions();
+        return;
+
+      }
+
+      if (randomPlayerX === giftPlayer2.x && randomPlayerY === giftPlayer2.y) {
         getPlayerPositions();
         return;
 
@@ -1520,7 +1575,8 @@ $(function() {
     }
 
     // Add gift, player and obstacle styles
-    gift0.stylize();
+    giftPlayer1.stylize();
+    giftPlayer2.stylize();
     gift1.stylize();
     gift2.stylize();
     gift3.stylize();
@@ -1545,7 +1601,8 @@ $(function() {
     drawGrid();
 
     // Add gift, player and obstacle styles
-    gift0.stylize();
+    giftPlayer1.stylize();
+    giftPlayer2.stylize();
     gift1.stylize();
     gift2.stylize();
     gift3.stylize();
