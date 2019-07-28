@@ -5,7 +5,9 @@
 
 // --- Focus on this --- //
 
-* Implement an actual default weapon that is dropped when they pick up their first weapon.
+* XS gift does not get highlight color until hoved over.
+* opening screen, giving mode screen (with Round: 1!) and end screen
+* Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
 
 // --- For Further Study -- //
 
@@ -17,7 +19,7 @@
 
 * opening screen, giving mode screen (with Round: 1!) and end screen
 
-* Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
+
 * If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
 * Make code modular (in other .js files) -> see line 30
 * Put styles directly into css and activate using jQuery .css, .addClass and .removeClass
@@ -25,7 +27,10 @@
 
 
 // ------ Bug Reports ------ //
-* XS gift does not get highlight color until hoved over.
+
+* Urgent: Original gifts (1-4) are only being pushed to giftsX[] and giftsY[] once. Those need to be updated whenever a gift's position (x or y) changes.
+This may cause problems otherwise with checking for possible moves and such.
+
 * It is possible for both players to spawn on the same tile, or on adjacent tiles!
 * If two gifts are on adjacent tiles, it is possible for player to click on one gift and pick up the other, because of didPlayerPassGift();
 
@@ -268,7 +273,18 @@ $(function() {
         if (this.nr === 1) {
           this.activeTile.style = player1Styles;
 
-          if (this.giftType === 'sm') {
+          if (this.giftType === 'xs-1') {
+
+            // Find how to do these background properties all on one line!!!!!!!!!!! (CSS tag 'background')
+            // this.activeTile.style.background = 'url("/assets/sm.png") center 30px no-repeat';
+
+            this.activeTile.style.backgroundImage = 'url("/assets/cross.png")';
+            this.activeTile.style.backgroundPosition = 'center';
+            this.activeTile.style.backgroundSize = '30px';
+            this.activeTile.style.backgroundRepeat = 'no-repeat';
+
+
+          } else if (this.giftType === 'sm') {
 
             // Find how to do these background properties all on one line!!!!!!!!!!! (CSS tag 'background')
             // this.activeTile.style.background = 'url("/assets/sm.png") center 30px no-repeat';
@@ -305,7 +321,18 @@ $(function() {
         } else {
           this.activeTile.style = player2Styles;
 
-          if (this.giftType === 'sm') {
+          if (this.giftType === 'xs-2') {
+
+            // Find how to do these background properties all on one line!!!!!!!!!!! (CSS tag 'background')
+            // this.activeTile.style.background = 'url("/assets/sm.png") center 30px no-repeat';
+
+            this.activeTile.style.backgroundImage = 'url("/assets/cross.png")';
+            this.activeTile.style.backgroundPosition = 'center';
+            this.activeTile.style.backgroundSize = '30px';
+            this.activeTile.style.backgroundRepeat = 'no-repeat';
+
+
+          } else if (this.giftType === 'sm') {
 
             this.activeTile.style.backgroundImage = 'url("/assets/sm.png")';
             this.activeTile.style.backgroundPosition = 'center';
@@ -354,6 +381,7 @@ $(function() {
 
           if (this.giftType === 'xs-p1') {
             this.activeTile.style = xsGiftStyles;
+            // console.log("About to check if xs-p1 is on a possible move.");
             if (isGiftOnPossibleMove(this.giftType)) {
               giftPlayer1.activeTile.style.backgroundColor = possibleMovesBackground;
 
@@ -361,6 +389,7 @@ $(function() {
             }
           } else if (this.giftType === 'xs-p2') {
             this.activeTile.style = xsGiftStyles;
+            console.log("About to check if xs-p2 is on a possible move.");
             if (isGiftOnPossibleMove(this.giftType)) {
               giftPlayer2.activeTile.style.backgroundColor = possibleMovesBackground;
 
@@ -437,7 +466,7 @@ $(function() {
         if ((activePlayer.prevY > giftsY[i] && activePlayer.y < giftsY[i]) || (activePlayer.prevY < giftsY[i] && activePlayer.y > giftsY[i])) {
           // console.log("Player" + activePlayer.nr + " has same X as gift" + (i + 1) + " and has passed over it.");
 
-          // Identify and add to player the correct gift.
+          // Identify and add correct gift to player.
           if (i + 1 === 1) {
             // giftWithSameX = gift1;
             addGiftToPlayer('sm');
@@ -513,6 +542,7 @@ $(function() {
 
           if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
 
+            console.log("xs-p1 is on a possible move.");
             return true;
 
           }
@@ -523,6 +553,7 @@ $(function() {
           let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
 
           if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
+            console.log("xs-p2 is on a possible move.");
 
             return true;
 
@@ -973,7 +1004,12 @@ $(function() {
       // New giftType added
       player1.giftType = giftType;
       // Adjust player's giftStrength accordingly.
-      if (giftType === 'sm') {
+      if (giftType === 'xs-p1') {
+        // console.log("You picked up a sm gift");
+        player1.giftStrength = GiftStrengthAmount.XS;
+        giftPlayer1.hidden = true;
+
+      } else if (giftType === 'sm') {
         // console.log("You picked up a sm gift");
         player1.giftStrength = GiftStrengthAmount.SM;
         gift1.hidden = true;
@@ -1000,7 +1036,12 @@ $(function() {
 
       // New giftType added
       player2.giftType = giftType;
-      if (giftType === 'sm') {
+      if (giftType === 'xs-p2') {
+        // console.log("You picked up a sm gift");
+        player2.giftStrength = GiftStrengthAmount.XS;
+        giftPlayer2.hidden = true;
+
+      } else if (giftType === 'sm') {
         // console.log("You picked up a sm gift");
         player2.giftStrength = GiftStrengthAmount.SM;
         gift1.hidden = true;
