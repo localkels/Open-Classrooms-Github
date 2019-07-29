@@ -17,7 +17,7 @@
 
 // ------- Possible Updates ------- //
 
-* opening screen, giving mode screen (with Round: 1!) and end screen
+* opening screen, giving mode screen (with Round: 1!) and end screen (Work on begin and end gamestates!!!)
 
 
 * If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
@@ -29,10 +29,15 @@
 // ------ Bug Reports ------ //
 
 * Urgent: Original gifts (1-4) are only being pushed to giftsX[] and giftsY[] once. Those need to be updated whenever a gift's position (x or y) changes.
+
+* When player picks up "X" update UI!
+
 This may cause problems otherwise with checking for possible moves and such.
 
 * It is possible for both players to spawn on the same tile, or on adjacent tiles!
 * If two gifts are on adjacent tiles, it is possible for player to click on one gift and pick up the other, because of didPlayerPassGift();
+
+
 
 
 */
@@ -1191,9 +1196,13 @@ $(function() {
 
     let tooltipText;
 
+    // Implement template literals on all of these!
+    // Try optimizing this area with local variables => replace giftStrength and variable names with variables.
+    // Try never to repeat code.
+
     if (activePlayer === player1 && isHoverOnGive) {
 
-      tooltipText = "<strong><em>-" + player1.giftStrength + " SP</em></strong> for Player2."
+      tooltipText = `<strong><em>- ${player1.giftStrength} SP</em></strong> for Player2 (or  -${player1.giftStrength / 2} SP if they complain).`
 
     } else if (activePlayer === player1 && !isHoverOnGive) {
 
