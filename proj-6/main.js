@@ -5,9 +5,12 @@
 
 // --- Focus on this --- //
 
+* opening screen, giving mode screen (with Round: 1!) and end screen (Work on begin and end gamestates!!!)
+
 * XS gift does not get highlight color until hoved over.
+
 * opening screen, giving mode screen (with Round: 1!) and end screen
-* Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
+  * Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
 
 // --- For Further Study -- //
 
@@ -19,14 +22,14 @@
 
 * opening screen, giving mode screen (with Round: 1!) and end screen (Work on begin and end gamestates!!!)
 
-
-* If time allows, implement an actual default weapon that is dropped when they pick up their first weapon.
-* Make code modular (in other .js files) -> see line 30
-* Put styles directly into css and activate using jQuery .css, .addClass and .removeClass
-* Rearrange functions in a logical order (if you can't put code blocks in different files)
+* Make a list of ways to optimize and of bugs, then prioritize and fix most important ones.
+  * Put styles directly into css and activate using jQuery .css, .addClass and .removeClass
+  * Rearrange functions in a logical order (if you can't put code blocks in different files)
 
 
 // ------ Bug Reports ------ //
+
+Priority: How serious is it? How likely is it to happen?
 
 * Urgent: Original gifts (1-4) are only being pushed to giftsX[] and giftsY[] once. Those need to be updated whenever a gift's position (x or y) changes.
 
@@ -36,7 +39,6 @@ This may cause problems otherwise with checking for possible moves and such.
 
 * It is possible for both players to spawn on the same tile, or on adjacent tiles!
 * If two gifts are on adjacent tiles, it is possible for player to click on one gift and pick up the other, because of didPlayerPassGift();
-
 
 
 
@@ -78,7 +80,7 @@ $(function() {
   let possibleMoves = [];
   let gridRows = []; // Stores all rows
 
-  const NUM_OBSTACLES = 0;
+  const NUM_OBSTACLES = 20;
   const NUM_MOVES = 3;
 
   // Enumeration data structure
@@ -115,11 +117,13 @@ $(function() {
   let player1;
   let player2;
 
+  // Add this to givingModeInfo object
   let isFirstGivingRound = true;
 
 
   //////// Arrays for obstacles gifts and players ////////
 
+  // Put objects into arrays and eliminate obstaclesY, giftsX, etc.
   let obstaclesArray = [];
   let obstaclesX = [];
   let obstaclesY = [];
@@ -147,6 +151,8 @@ $(function() {
 
   ////////////////   STYLES  ////////////////
 
+  // put these into classes or css
+
   let defaultStyles = 'background: ' + defaultBackground + '; border: solid ' + defaultBorder + ' 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
   let possibleMovesStyles = 'background: ' + possibleMovesBackground + '; border: solid ' + defaultBorder + ' 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
@@ -158,6 +164,8 @@ $(function() {
   let obstacleStyles = 'background: ' + obstacleBackground + '; border: solid ' + obstacleBorder + ' 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
   ////////////////   GIFT STYLES  ////////////////
+
+  // put these into classes or css
 
   let xsGiftStyles = 'background-image: url("/assets/cross.png"); background-color: springgreen; background-size: 30px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
@@ -379,6 +387,8 @@ $(function() {
       this.hidden = false;
       this.x = x; // getRandomIndex(true, -1, gridSize, 'gift'); // positions (x and y)
       this.y = y; // getRandomIndex(false, this.x, gridSize, 'gift');
+      // Fix gift array thingy by adding to gift class...
+      this.tileX;
       this.activeTile = gridRows[this.y].children[this.x];
       this.stylize = function() {
         if (this.hidden === false) {
@@ -1239,7 +1249,7 @@ $(function() {
     tippy.setDefaults({
       placement: "bottom-start",
       size: "small",
-      maxWidth: 95,
+      maxWidth: 105,
       arrow: true,
       animation: 'fade',
       duration: 100,
@@ -1493,6 +1503,7 @@ $(function() {
           return;
         }
       }
+      // Add these to the Gift class!!!
       giftsX.push(randomGiftX);
       giftsY.push(randomGiftY);
 
