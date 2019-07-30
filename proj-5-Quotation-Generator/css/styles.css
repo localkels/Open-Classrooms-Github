@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:300,400,800');
+
+body {
+  /* background: #842152; */
+  background-image:
+  -webkit-linear-gradient(red, #842152);
+  background-image:
+  -o-linear-gradient(red, #842152);
+  background-image:
+  linear-gradient(red, #842152);
+  color: white;
+  font-family: 'Dosis', sans-serif;
+  height: 100vh;
+}
+.container {
+  margin: 5vh auto;
+  padding: 40px 30px;
+  max-width: 300px;
+  max-height: 500px;
+  background: rgba(0,0,50,0.2);
+  border-radius: 20px;
+}
+
+#quotes {
+  font-size: 1.2em;
+  font-style: normal;
+  padding: 0 0 10px;
+  margin: 10px;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 2.5em;
+}
+h2 {
+  padding: 0 0 25px;
+  margin: 0;
+  text-align: center;
+  font-size: 1.0em;
+  font-weight: lighter;
+}
