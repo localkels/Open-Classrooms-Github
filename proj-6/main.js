@@ -1,7 +1,7 @@
 /*
 
 // ------- STORY ------- //
-* Two friends are out in the field one day. Neither of them had a good day today. They're both feeling a bit down. See what you can find to cheer your friend up. After all, it might even help you feel better yourself.
+* You and your friend are out in the forest. Neither of you have had a good day today. You are both feeling a bit down. See what you can find to give to your friend. Perhaps you can cheer him up. After all, it might even help you feel better yourself.
 
 // --- Focus on this --- //
 
