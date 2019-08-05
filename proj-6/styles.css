@@ -40,13 +40,13 @@ body {
   margin: auto;
   width: 360px;
   height: 360px;
-  background: darkgreen;
+  background: seagreen;
   border: solid mediumseagreen 2px;
   box-sizing: border-box;
 }
 
 .openingText {
-  padding: 0 10px ;
+  padding: 0 30px ;
   /* margin: auto; */
   display: flex;
   align-self: center;

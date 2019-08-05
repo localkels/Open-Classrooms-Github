@@ -8,6 +8,8 @@
 * End screen
 * correct obstacle check!
 
+* If time allows, add gift image to top of opening screen and ending screen
+
 // --- For Further Study -- //
 
 * Look up "Git in Atom"
