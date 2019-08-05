@@ -89,7 +89,7 @@ $(function() {
   const GIVING = 3;
   const END = 4;
   // const RESTART = 5;
-  let activeGameState = BEGIN; // Set current state here.
+  let activeGameState = EXPLORE; // Set current state here.
 
   // Even better enumeration!
   const PlayerFightState = Object.freeze({
@@ -702,16 +702,18 @@ $(function() {
 
     function checkForGameEnd() {
 
-      if (player1.sadPoints <= 0){
+      if (player1.sadPoints <= 0 && player1.sadPoints < player2.sadPoints){
 
         console.log("GAME OVER! Player 2 wins!");
+        gameInfo.winner = player2;
         activeGameState = END;
         checkForStateChange();
 
-      } else if (player2.sadPoints <= 0) {
+      } else if (player2.sadPoints <= 0 && player2.sadPoints < player1.sadPoints) {
 
         console.log("GAME OVER! Player 1 wins!");
         activeGameState = END;
+        gameInfo.winner = player1;
         checkForStateChange();
 
       }
@@ -782,6 +784,7 @@ $(function() {
 
   }
   function restartGame() {
+    activeGameState = BEGIN;
     location.reload();
 
     // checkForStateChange();
@@ -882,6 +885,11 @@ $(function() {
     $('.grid').removeClass('no-line-height');
     // add grid.empty
     $('.grid').empty();
+    grid.removeEventListener('click', targetCheck);
+    grid.removeEventListener('click', checkForPlayerAdjacent);
+
+
+
 
 
     // Now that game has been run once, change isFirstGameRun to false
@@ -898,14 +906,25 @@ $(function() {
 
   }
 
+  function generateClosingMessage(winnerNumber) {
+
+    let closingMessage = "Great job, Player" + winnerNumber + "!</ br> You cheered up your friend!"
+
+    return closingMessage;
+
+
+  }
+
   // IMPROVE: Merge printOpeningScreen() and printClosingScreen() into one function with a param that determins whether opening or closing screen is printed.
   function printClosingScreen() {
+    let closingMessage = generateClosingMessage(gameInfo.winner.nr);
+    console.log("Winner: Player" + gameInfo.winner.nr);
     let closingTextWrapper = document.createElement('div');
     closingTextWrapper.className = 'closingTextWrapper';
     let closingText = document.createElement('p');
     closingText.className = 'closingText';
 
-    closingText.innerHTML = 'You lose!';
+    closingText.innerHTML = closingMessage;
     let closingButton = document.createElement('button');
     closingButton.innerHTML = "Click to Restart!";
     closingButton.className = "closingButton";
