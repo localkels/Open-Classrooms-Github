@@ -88,7 +88,7 @@ $(function() {
   const EXPLORE = 2;
   const GIVING = 3;
   const END = 4;
-  const RESTART = 5;
+  // const RESTART = 5;
   let activeGameState = BEGIN; // Set current state here.
 
   // Even better enumeration!
@@ -743,9 +743,6 @@ $(function() {
     } else if (activeGameState === END) {
       runEndState();
 
-    } else if (activeGameState === RESTART) {
-      runRestartState();
-
     } else {
       console.log('ERROR: activeGameState is invalid.');
     }
@@ -785,29 +782,16 @@ $(function() {
 
   }
   function restartGame() {
+    location.reload();
 
     // checkForStateChange();
     // runBeginState();
 
   }
 
-  function runRestartState() {
-    console.log('Running Restart State');
-    $('.grid').empty();
-    activeGameState = BEGIN;
-    // ISSUE: Values need to be reset to originals for restart to function properly
-    printOpeningScreen();
-
-    console.log('Ending Restart State');
-
-
-  }
 
   function runBeginState() {
     console.log('Running Begin State');
-    // Begin state is intended to...
-    // Give background info on context of game and short explanation of how game works.
-    // $('.grid').empty();
     printOpeningScreen();
 
     console.log('Ending Begin State');
@@ -901,10 +885,10 @@ $(function() {
 
 
     // Now that game has been run once, change isFirstGameRun to false
-    if (gameInfo.isFirstGameRun) {
-      gameInfo.isFirstGameRun = false;
-
-    }
+    // if (gameInfo.isFirstGameRun) {
+    //   gameInfo.isFirstGameRun = false;
+    //
+    // }
 
     printClosingScreen();
 
@@ -925,7 +909,7 @@ $(function() {
     let closingButton = document.createElement('button');
     closingButton.innerHTML = "Click to Restart!";
     closingButton.className = "closingButton";
-    $(closingButton).on("click", runRestartState);
+    $(closingButton).on("click", restartGame);
 
     // closingText.style =
     // newSpan.style = "width:" + tileSize + "px; height:" + tileSize + "px;";
