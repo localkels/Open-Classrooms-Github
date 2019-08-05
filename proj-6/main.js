@@ -6,6 +6,7 @@
 // --- Focus on this --- //
 
 * End screen
+giving mode pop-up (with Round: 1!)
 * correct obstacle check!
 
 * If time allows, add gift image to top of opening screen and ending screen
@@ -87,6 +88,7 @@ $(function() {
   const EXPLORE = 2;
   const GIVING = 3;
   const END = 4;
+  const RESTART = 5;
   let activeGameState = BEGIN; // Set current state here.
 
   // Even better enumeration!
@@ -97,11 +99,11 @@ $(function() {
     });
 
   const GiftStrengthAmount = Object.freeze({
-        "XS": 20,
-        "SM": 22,
-        "MD": 24,
-        "LG": 26,
-        "XL": 28
+        "XS": 40,
+        "SM": 42,
+        "MD": 44,
+        "LG": 46,
+        "XL": 48
       });
 
   // Create global variables for objects.
@@ -441,8 +443,9 @@ $(function() {
   }
 
 
-  let givingModeInfo = {
-    round: 0
+  let gameInfo = {
+    isFirstGameRun: true,
+    givingRound: 0
   };
 
 
@@ -644,8 +647,8 @@ $(function() {
 
     function roundChange() {
       // console.log("Running roundChange()");
-        givingModeInfo.round += 1;
-        console.log("Round " + givingModeInfo.round);
+        gameInfo.givingRound += 1;
+        console.log("Round " + gameInfo.givingRound);
 
         // Based on each player's choice (fightState), run function that subtracts from each player's sadPoints.
         subtractSadPoints();
@@ -714,9 +717,20 @@ $(function() {
       }
     }
 
+  function isFirstGameRun() {
+
+  }
+
 
   function checkForStateChange() {
     if (activeGameState === BEGIN) {
+      // if (gameInfo.isFirstGameRun) {
+      //   console.log("isFirstGameRun: " + gameInfo.isFirstGameRun + " Now running Begin State.");
+      //   runBeginState();
+      // } else {
+      //   console.log("isFirstGameRun: " + gameInfo.isFirstGameRun + " Now running restartGame.");
+      //   restartGame();
+      // }
       runBeginState();
 
     } else if (activeGameState === EXPLORE) {
@@ -728,6 +742,9 @@ $(function() {
 
     } else if (activeGameState === END) {
       runEndState();
+
+    } else if (activeGameState === RESTART) {
+      runRestartState();
 
     } else {
       console.log('ERROR: activeGameState is invalid.');
@@ -748,18 +765,13 @@ $(function() {
   // ===================================== STATE FUNCTIONS =================================== //
   // ========================================================================================= //
 
-  function runBeginState() {
-    // console.log('Running Begin State');
-    // Begin state is intended to...
-    // Give background info on context of game and short explanation of how game works.
-
-    // console.log('Ending Begin State');
+  function printOpeningScreen() {
     let openingTextWrapper = document.createElement('div');
     openingTextWrapper.className = 'openingTextWrapper';
     let openingText = document.createElement('p');
     openingText.className = 'openingText';
 
-    openingText.innerText = 'You and your friend are out in the forest. Neither of you have had a good day today. You are both feeling a bit down. See what you can find to give to your friend. Perhaps you can cheer him up. After all, it might even help you feel better yourself.';
+    openingText.innerHTML = 'You and your friend are out in the forest. Neither of you have had a good day today. You are both feeling a bit down. See what you can find to give to your friend. Perhaps you can cheer him up. After all, it might even help you feel better yourself.';
     let openingButton = document.createElement('button');
     openingButton.innerHTML = "Click to Start!";
     openingButton.className = "openingButton";
@@ -770,6 +782,36 @@ $(function() {
     openingTextWrapper.append(openingText);
     openingTextWrapper.append(openingButton);
     grid.appendChild(openingTextWrapper);
+
+  }
+  function restartGame() {
+
+    // checkForStateChange();
+    // runBeginState();
+
+  }
+
+  function runRestartState() {
+    console.log('Running Restart State');
+    $('.grid').empty();
+    activeGameState = BEGIN;
+    // ISSUE: Values need to be reset to originals for restart to function properly
+    printOpeningScreen();
+
+    console.log('Ending Restart State');
+
+
+  }
+
+  function runBeginState() {
+    console.log('Running Begin State');
+    // Begin state is intended to...
+    // Give background info on context of game and short explanation of how game works.
+    // $('.grid').empty();
+    printOpeningScreen();
+
+    console.log('Ending Begin State');
+
 
   }
 
@@ -841,7 +883,7 @@ $(function() {
     // Enables "give" and "complain" buttons
     enableUiButtons(activePlayer);
 
-    console.log("Round " + givingModeInfo.round);
+    console.log("Round " + gameInfo.givingRound);
 
     // Giving/Complaining needs to take place here.
 
@@ -854,10 +896,42 @@ $(function() {
     console.log('Running End State');
 
     $('.grid').removeClass('no-line-height');
+    // add grid.empty
+    $('.grid').empty();
+
+
+    // Now that game has been run once, change isFirstGameRun to false
+    if (gameInfo.isFirstGameRun) {
+      gameInfo.isFirstGameRun = false;
+
+    }
+
+    printClosingScreen();
 
     // Intended to congratulate 'winning' user and encourage them with an inspirational thought.
 
     console.log('Ending End State');
+
+  }
+
+  // IMPROVE: Merge printOpeningScreen() and printClosingScreen() into one function with a param that determins whether opening or closing screen is printed.
+  function printClosingScreen() {
+    let closingTextWrapper = document.createElement('div');
+    closingTextWrapper.className = 'closingTextWrapper';
+    let closingText = document.createElement('p');
+    closingText.className = 'closingText';
+
+    closingText.innerHTML = 'You lose!';
+    let closingButton = document.createElement('button');
+    closingButton.innerHTML = "Click to Restart!";
+    closingButton.className = "closingButton";
+    $(closingButton).on("click", runRestartState);
+
+    // closingText.style =
+    // newSpan.style = "width:" + tileSize + "px; height:" + tileSize + "px;";
+    closingTextWrapper.append(closingText);
+    closingTextWrapper.append(closingButton);
+    grid.appendChild(closingTextWrapper);
 
   }
 

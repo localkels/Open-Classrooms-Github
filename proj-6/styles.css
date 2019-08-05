@@ -63,6 +63,37 @@ body {
 
 }
 
+.closingTextWrapper {
+  line-height: normal;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin: auto;
+  width: 360px;
+  height: 360px;
+  background: seagreen;
+  border: solid mediumseagreen 2px;
+  box-sizing: border-box;
+}
+
+.closingText {
+  padding: 0 30px ;
+  /* margin: auto; */
+  display: flex;
+  align-self: center;
+  /* width: 100%; */
+
+}
+
+.closingButton {
+  /* display: block; */
+  /* width: 200px; */
+  width: 140px;
+  height: 30px;
+  align-self: center;
+
+}
+
 .grid span.tile {
   background: springgreen;
   border: solid mediumseagreen 2px;
