@@ -87,11 +87,11 @@ $(function() {
     });
 
   const GiftStrengthAmount = Object.freeze({
-        "XS": 40,
-        "SM": 42,
-        "MD": 44,
-        "LG": 46,
-        "XL": 48
+        "XS": 10,
+        "SM": 15,
+        "MD": 20,
+        "LG": 25,
+        "XL": 30
       });
 
   let gameInfo = {
