@@ -1,41 +1,3 @@
-/*
-// --- Focus on this --- //
-
-* End screen
-giving mode pop-up (with Round: 1!)
-* correct obstacle check!
-
-* If time allows, add gift image to top of opening screen and ending screen
-
-// --- For Further Study -- //
-
-* Look up "Git in Atom"
-* Also look up template literals
-* Look into altering the css with -> .css and .addClass, .removeClass
-
-// ------- Possible Updates ------- //
-
-* opening screen, giving mode screen (with Round: 1!) and end screen (Work on begin and end gamestates!!!)
-
-* Make a list of ways to optimize and of bugs, then prioritize and fix most important ones.
-  * Put styles directly into css and activate using jQuery .css, .addClass and .removeClass
-  * Rearrange functions in a logical order (if you can't put code blocks in different files)
-
-// ------ Bug Reports ------ //
-
-Priority: How serious is it? How likely is it to happen?
-
-* Urgent: Original gifts (1-4) are only being pushed to giftsX[] and giftsY[] once. Those need to be updated whenever a gift's position (x or y) changes.
-
-* When player picks up "X" update UI!
-
-This may cause problems otherwise with checking for possible moves and such.
-
-* It is possible for both players to spawn on the same tile, or on adjacent tiles!
-* If two gifts are on adjacent tiles, it is possible for player to click on one gift and pick up the other, because of didPlayerPassGift();
-
-*/
-
 
 // ---------------- Initializing jQuery ---------------- //
 
@@ -113,8 +75,6 @@ $(function() {
   let player1;
   let player2;
 
-  // let activeTile; // need to remove but do it later, when you have time, just in case.
-
 
   ///////////// Arrays for obstacles gifts and players /////////////
 
@@ -175,7 +135,7 @@ $(function() {
   let xlGiftStyles = 'background-image: url("/assets/xl.png"); background-color: springgreen; background-size: 27px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
 
-// ------------------------- SETTING UP OBJECTS ------------------------ //
+// ------------------------- SETTING UP CLASSES ------------------------ //
 
   class Player {
     constructor(nr, x, y, sadPoints, giftType, giftStrength) {
@@ -335,7 +295,7 @@ $(function() {
 
           }
         }
-      };
+      }
     }
   }
 
@@ -417,157 +377,15 @@ $(function() {
   // ========================================== READY, SET, GO! ========================================== //
   // The first function that runs (besides jQuery, of course):
 
-  checkForStateChange();
+  runBeginState();
 
 
   ////////////////////////////////////// FUNCTIONS ///////////////////////////////////////////
 
-  function didPlayerPassGift(activePlayer) {
-    // IMPROVE: This function is doing more than just checking. Split it up!
-    // IMPROVE: Use For...in and for...of loops to make things more readable.
-
-    for (var i = 0; i < giftsX.length; i++) {
-      if (activePlayer.x === giftsX[i] && activePlayer.prevX === giftsX[i]) {
-
-        //Find out if player did pass over gift
-        if ((activePlayer.prevY > giftsY[i] && activePlayer.y < giftsY[i]) || (activePlayer.prevY < giftsY[i] && activePlayer.y > giftsY[i])) {
-
-          // Identify and add correct gift to player.
-          if (i + 1 === 1) {
-            addGiftToPlayer('sm');
-            activePlayer.drop();
-
-          } else if (i + 1 === 2) {
-            addGiftToPlayer('md');
-            activePlayer.drop();
-
-          } else if (i + 1 === 3) {
-            addGiftToPlayer('lg');
-            activePlayer.drop();
-
-          } else if (i + 1 === 4) {
-            addGiftToPlayer('xl');
-            activePlayer.drop();
-
-          }
-        }
-      }
-    }
-
-
-    for (var i = 0; i < giftsY.length; i++) {
-
-      if (activePlayer.y === giftsY[i] && activePlayer.prevY === giftsY[i]) {
-
-        //Find out if player did pass over gift
-        if ((activePlayer.prevX > giftsX[i] && activePlayer.x < giftsX[i]) || (activePlayer.prevX < giftsX[i] && activePlayer.x > giftsX[i])) {
-
-          // Identify and add to player the correct gift.
-          if (i + 1 === 1) {
-            addGiftToPlayer('sm');
-            activePlayer.drop();
-
-          } else if (i + 1 === 2) {
-            addGiftToPlayer('md');
-            activePlayer.drop();
-
-          } else if (i + 1 === 3) {
-            addGiftToPlayer('lg');
-            activePlayer.drop();
-
-          } else if (i + 1 === 4) {
-            addGiftToPlayer('xl');
-            activePlayer.drop();
-
-          }
-        }
-      }
-    }
-  }
 
   // ========================================================================================= //
   // ===================================== FIGHT FUNCTIONS =================================== //
   // ========================================================================================= //
-
-    function isGiftOnPossibleMove(giftType) {
-
-      if (giftType === 'xs-p1') {
-        for (let i = 0; i < possibleMoves.length; i++) {
-          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
-          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
-
-          if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
-
-            console.log("xs-p1 is on a possible move.");
-            return true;
-
-          }
-        }
-      } else if (giftType === 'xs-p2') {
-        for (let i = 0; i < possibleMoves.length; i++) {
-          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
-          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
-
-          if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
-            console.log("xs-p2 is on a possible move.");
-
-            return true;
-
-          }
-        }
-      } else if (giftType === 'sm') {
-        for (let i = 0; i < possibleMoves.length; i++) {
-          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
-          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
-
-          if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
-
-            return true;
-
-          }
-        }
-      } else if (giftType === 'md') {
-        for (let i = 0; i < possibleMoves.length; i++) {
-          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
-          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
-
-          if (giftsX[1] === xCalc(possibleMoveX) && giftsY[1] === yCalc(possibleMoveY)) {
-
-            return true;
-
-          }
-        }
-
-      }else if (giftType === 'lg') {
-        for (let i = 0; i < possibleMoves.length; i++) {
-          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
-          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
-
-          if (giftsX[2] === xCalc(possibleMoveX) && giftsY[2] === yCalc(possibleMoveY)) {
-
-            return true;
-
-          }
-        }
-
-      }else if (giftType === 'xl') {
-        for (let i = 0; i < possibleMoves.length; i++) {
-          let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
-          let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
-
-          if (giftsX[3] === xCalc(possibleMoveX) && giftsY[3] === yCalc(possibleMoveY)) {
-
-            return true;
-
-          }
-        }
-
-      } else {
-        return false;
-      }
-
-
-    }
 
     function checkForRoundChange() {
       // check if both players have a .fightState other than (i.e. greater than) "EMPTY"/1
@@ -676,25 +494,19 @@ $(function() {
 
     console.log('Ending Begin State');
 
-
   }
 
   function runExploreState() {
     console.log('Running Explore State');
-    // ===================================== RUN EXPLORE STATE ===================================== //
-    // .empty deletes all child elements, .detach could be used to retain them.
+
+    // NOTE: .empty deletes all child elements, .detach could be used to retain them.
     $('.grid').empty();
 
     $('.grid').addClass('no-line-height');
-    // There's some kind of scope conflict that is happening.
-    // See if you can create the vars for gifts and players in root scope first, though leave them with no value.
-
-
 
     getObstaclePositions();
     drawGrid();
     getGiftPositions();
-
 
     giftPlayer1 = new Gift('xs-p1', GiftStrengthAmount.XS, 0, 0);
     giftPlayer1.hidden = true;
@@ -761,35 +573,31 @@ $(function() {
     grid.removeEventListener('click', targetCheck);
     grid.removeEventListener('click', checkForPlayerAdjacent);
 
-
     printClosingScreen();
-
-
 
     console.log('Ending End State');
 
   }
 
   function restartGame() {
-    activeGameState = BEGIN;
     location.reload();
-
   }
 
   function printOpeningScreen() {
     let openingTextWrapper = document.createElement('div');
     openingTextWrapper.className = 'openingTextWrapper';
+
     let openingText = document.createElement('p');
     openingText.className = 'openingText';
 
     openingText.innerHTML = 'You and your friend are out in the forest. Neither of you have had a good day today. You are both feeling a bit down. See what you can find to give to your friend. Perhaps you can cheer him up. After all, it might even help you feel better yourself.';
+
     let openingButton = document.createElement('button');
     openingButton.innerHTML = "Click to Start!";
     openingButton.className = "openingButton";
+
     $(openingButton).on("click", runExploreState);
 
-    // openingText.style =
-    // newSpan.style = "width:" + tileSize + "px; height:" + tileSize + "px;";
     openingTextWrapper.append(openingText);
     openingTextWrapper.append(openingButton);
     grid.appendChild(openingTextWrapper);
@@ -799,20 +607,22 @@ $(function() {
   // IMPROVE: Merge printOpeningScreen() and printClosingScreen() into one function with a param that determins whether opening or closing screen is printed.
   function printClosingScreen() {
     let closingMessage = generateClosingMessage(gameInfo.winner.nr);
+
     console.log("Winner: Player" + gameInfo.winner.nr);
+
     let closingTextWrapper = document.createElement('div');
     closingTextWrapper.className = 'closingTextWrapper';
+
     let closingText = document.createElement('p');
     closingText.className = 'closingText';
-
     closingText.innerHTML = closingMessage;
+
     let closingButton = document.createElement('button');
     closingButton.innerHTML = "Click to Restart!";
     closingButton.className = "closingButton";
+
     $(closingButton).on("click", restartGame);
 
-    // closingText.style =
-    // newSpan.style = "width:" + tileSize + "px; height:" + tileSize + "px;";
     closingTextWrapper.append(closingText);
     closingTextWrapper.append(closingButton);
     grid.appendChild(closingTextWrapper);
@@ -964,6 +774,86 @@ $(function() {
 
   }
 
+  function isGiftOnPossibleMove(giftType) {
+
+    if (giftType === 'xs-p1') {
+      for (let i = 0; i < possibleMoves.length; i++) {
+        let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+        let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+        if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
+
+          console.log("xs-p1 is on a possible move.");
+          return true;
+
+        }
+      }
+    } else if (giftType === 'xs-p2') {
+      for (let i = 0; i < possibleMoves.length; i++) {
+        let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+        let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+        if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
+          console.log("xs-p2 is on a possible move.");
+
+          return true;
+
+        }
+      }
+    } else if (giftType === 'sm') {
+      for (let i = 0; i < possibleMoves.length; i++) {
+        let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+        let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+        if (giftsX[0] === xCalc(possibleMoveX) && giftsY[0] === yCalc(possibleMoveY)) {
+
+          return true;
+
+        }
+      }
+    } else if (giftType === 'md') {
+      for (let i = 0; i < possibleMoves.length; i++) {
+        let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+        let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+        if (giftsX[1] === xCalc(possibleMoveX) && giftsY[1] === yCalc(possibleMoveY)) {
+
+          return true;
+
+        }
+      }
+
+    }else if (giftType === 'lg') {
+      for (let i = 0; i < possibleMoves.length; i++) {
+        let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+        let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+        if (giftsX[2] === xCalc(possibleMoveX) && giftsY[2] === yCalc(possibleMoveY)) {
+
+          return true;
+
+        }
+      }
+
+    }else if (giftType === 'xl') {
+      for (let i = 0; i < possibleMoves.length; i++) {
+        let possibleMoveX = possibleMoves[i].getBoundingClientRect().x;
+        let possibleMoveY = possibleMoves[i].getBoundingClientRect().y;
+
+        if (giftsX[3] === xCalc(possibleMoveX) && giftsY[3] === yCalc(possibleMoveY)) {
+
+          return true;
+
+        }
+      }
+
+    } else {
+      return false;
+    }
+
+
+  }
+
   function addGiftToPlayer(giftType) {
 
     if (activePlayer === player1) {
@@ -1034,9 +924,9 @@ $(function() {
   }
 
 
-  // ======================================================================================================= //
-  // ==================================== PLAYER MOVEMENT CALCULATIONS ===================================== //
-  // ======================================================================================================= //
+  // =================================================================================================== //
+  // ==================================== PLAYER MOVEMENT FUNCTIONS ==================================== //
+  // =================================================================================================== //
 
   function calcPossibleMoves() {
 
@@ -1089,6 +979,69 @@ $(function() {
       }
     }
     return false;
+  }
+
+  function didPlayerPassGift(activePlayer) {
+    // IMPROVE: This function is doing more than just checking. Split it up!
+    // IMPROVE: Use For...in and for...of loops to make things more readable.
+
+    for (var i = 0; i < giftsX.length; i++) {
+      if (activePlayer.x === giftsX[i] && activePlayer.prevX === giftsX[i]) {
+
+        //Find out if player did pass over gift
+        if ((activePlayer.prevY > giftsY[i] && activePlayer.y < giftsY[i]) || (activePlayer.prevY < giftsY[i] && activePlayer.y > giftsY[i])) {
+
+          // Identify and add correct gift to player.
+          if (i + 1 === 1) {
+            addGiftToPlayer('sm');
+            activePlayer.drop();
+
+          } else if (i + 1 === 2) {
+            addGiftToPlayer('md');
+            activePlayer.drop();
+
+          } else if (i + 1 === 3) {
+            addGiftToPlayer('lg');
+            activePlayer.drop();
+
+          } else if (i + 1 === 4) {
+            addGiftToPlayer('xl');
+            activePlayer.drop();
+
+          }
+        }
+      }
+    }
+
+
+    for (var i = 0; i < giftsY.length; i++) {
+
+      if (activePlayer.y === giftsY[i] && activePlayer.prevY === giftsY[i]) {
+
+        //Find out if player did pass over gift
+        if ((activePlayer.prevX > giftsX[i] && activePlayer.x < giftsX[i]) || (activePlayer.prevX < giftsX[i] && activePlayer.x > giftsX[i])) {
+
+          // Identify and add to player the correct gift.
+          if (i + 1 === 1) {
+            addGiftToPlayer('sm');
+            activePlayer.drop();
+
+          } else if (i + 1 === 2) {
+            addGiftToPlayer('md');
+            activePlayer.drop();
+
+          } else if (i + 1 === 3) {
+            addGiftToPlayer('lg');
+            activePlayer.drop();
+
+          } else if (i + 1 === 4) {
+            addGiftToPlayer('xl');
+            activePlayer.drop();
+
+          }
+        }
+      }
+    }
   }
 
 
@@ -1176,7 +1129,6 @@ $(function() {
 
     }
     return tooltipText;
-
 
   }
 
