@@ -5,12 +5,8 @@
 
 // --- Focus on this --- //
 
-* opening screen, giving mode screen (with Round: 1!) and end screen (Work on begin and end gamestates!!!)
-
-* XS gift does not get highlight color until hoved over.
-
-* opening screen, giving mode screen (with Round: 1!) and end screen
-  * Do a check to see if players are in the top half, or bottom... or left or right. Then put explanation box where they are not.
+* End screen
+* correct obstacle check!
 
 // --- For Further Study -- //
 
@@ -89,7 +85,7 @@ $(function() {
   const EXPLORE = 2;
   const GIVING = 3;
   const END = 4;
-  let activeGameState = EXPLORE; // Set current state here.
+  let activeGameState = BEGIN; // Set current state here.
 
   // Even better enumeration!
   const PlayerFightState = Object.freeze({
@@ -251,16 +247,6 @@ $(function() {
         }
 
       };
-
-      // Note: Both players must choose move before points are subtracted.
-      // Store each player's state (whether they are giving or complaining)
-      // After both have chosen a state (clears after each round)
-      // Check states after each turn. Once both players have a state (other than clear), subtract points and move to next round.
-      // Make state object that has 3 different "options"
-
-      // Rebeccah's code sample (Enumeration Data Type (look into it)!!!):
-      // const PlayerFightState = Object.freeze({"EMPTY":1, "GIVING":2, "COMPLAINING":3});
-      // Consider Enum-ing game states as well.
 
 
       this.give = function() {
@@ -766,15 +752,36 @@ $(function() {
     // Give background info on context of game and short explanation of how game works.
 
     // console.log('Ending Begin State');
+    let openingTextWrapper = document.createElement('div');
+    openingTextWrapper.className = 'openingTextWrapper';
+    let openingText = document.createElement('p');
+    openingText.className = 'openingText';
+
+    openingText.innerText = 'You and your friend are out in the forest. Neither of you have had a good day today. You are both feeling a bit down. See what you can find to give to your friend. Perhaps you can cheer him up. After all, it might even help you feel better yourself.';
+    let openingButton = document.createElement('button');
+    openingButton.innerHTML = "Click to Start!";
+    openingButton.className = "openingButton";
+    $(openingButton).on("click", runExploreState);
+
+    // openingText.style =
+    // newSpan.style = "width:" + tileSize + "px; height:" + tileSize + "px;";
+    openingTextWrapper.append(openingText);
+    openingTextWrapper.append(openingButton);
+    grid.appendChild(openingTextWrapper);
 
   }
 
   function runExploreState() {
     console.log('Running Explore State');
+    // ===================================== RUN EXPLORE STATE ===================================== //
+    // .empty deletes all child elements, .detach could be used to retain them.
+    $('.grid').empty();
+
+    $('.grid').addClass('no-line-height');
     // There's some kind of scope conflict that is happening.
     // See if you can create the vars for gifts and players in root scope first, though leave them with no value.
 
-    // ===================================== RUN EXPLORE STATE ===================================== //
+
 
     getObstaclePositions();
     drawGrid();
@@ -829,7 +836,6 @@ $(function() {
     console.log('Running Giving State');
     refreshGivingGrid();
 
-
     // Enables "give" and "complain" buttons
     enableUiButtons(activePlayer);
 
@@ -844,6 +850,8 @@ $(function() {
 
   function runEndState() {
     console.log('Running End State');
+
+    $('.grid').removeClass('no-line-height');
 
     // Intended to congratulate 'winning' user and encourage them with an inspirational thought.
 
@@ -1361,6 +1369,8 @@ $(function() {
 
   function getObstaclePositions() {
 
+    // Check past obstacle positions to prevent obstacles being drawn on top of each other. See player position checks.
+
     for (let i = 0; i < NUM_OBSTACLES; i++) {
       obstaclesX.push(getRandomX())
       obstaclesY.push(getRandomY())
@@ -1596,6 +1606,7 @@ $(function() {
   // ======================================================================================================= //
 
   function drawGrid() {
+
 
     // Create gridsize amount of gridRows
     for (let i = 0; i < gridSize; i++) {

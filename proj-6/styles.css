@@ -23,8 +23,43 @@ body {
 }
 
 .grid {
-  line-height: 0;
+  /* Why is this line height here?*/
   border-radius: 0px;
+
+}
+
+.no-line-height {
+  line-height: 0;
+}
+
+.openingTextWrapper {
+  line-height: normal;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin: auto;
+  width: 360px;
+  height: 360px;
+  background: darkgreen;
+  border: solid mediumseagreen 2px;
+  box-sizing: border-box;
+}
+
+.openingText {
+  padding: 0 10px ;
+  /* margin: auto; */
+  display: flex;
+  align-self: center;
+  /* width: 100%; */
+
+}
+
+.openingButton {
+  /* display: block; */
+  /* width: 200px; */
+  width: 140px;
+  height: 30px;
+  align-self: center;
 
 }
 
