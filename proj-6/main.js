@@ -1,3 +1,6 @@
+// Feedback:
+// Make code modular - too much to follow
+// Divide functionality
 
 // ---------------- Initializing jQuery ---------------- //
 
@@ -124,15 +127,15 @@ $(function() {
 
   // IMPROVE: Put these into css classes or group in object (or both)!
 
-  let xsGiftStyles = 'background-image: url("/assets/cross.png"); background-color: springgreen; background-size: 30px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
+  let xsGiftStyles = 'background-image: url("assets/cross.png"); background-color: springgreen; background-size: 30px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
-  let smGiftStyles = 'background-image: url("/assets/sm.png"); background-color: springgreen; background-size: 30px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
+  let smGiftStyles = 'background-image: url("assets/sm.png"); background-color: springgreen; background-size: 30px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
-  let mdGiftStyles = 'background-image: url("/assets/md.png"); background-color: springgreen; background-size: 17px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
+  let mdGiftStyles = 'background-image: url("assets/md.png"); background-color: springgreen; background-size: 17px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
-  let lgGiftStyles = 'background-image: url("/assets/lg.png"); background-color: springgreen; background-size: 22px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
+  let lgGiftStyles = 'background-image: url("assets/lg.png"); background-color: springgreen; background-size: 22px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
-  let xlGiftStyles = 'background-image: url("/assets/xl.png"); background-color: springgreen; background-size: 27px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
+  let xlGiftStyles = 'background-image: url("assets/xl.png"); background-color: springgreen; background-size: 27px; background-repeat: no-repeat; background-position: center;  border: solid mediumseagreen 2px; width:' + tileSize + 'px; height:' + tileSize + 'px;';
 
 
 // ------------------------- SETTING UP CLASSES ------------------------ //
@@ -170,7 +173,6 @@ $(function() {
           giftPlayer2.y = this.y;
 
           giftPlayer2.hidden = false;
-
 
         } else if (this.prevGiftType === "sm") {
           gift1.x = this.x;
@@ -217,7 +219,7 @@ $(function() {
 
           if (this.giftType === 'xs-1') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/cross.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/cross.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '30px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
@@ -225,7 +227,7 @@ $(function() {
 
           } else if (this.giftType === 'sm') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/sm.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/sm.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '30px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
@@ -233,21 +235,21 @@ $(function() {
 
           } else if (this.giftType === 'md') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/md.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/md.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '15px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
 
           } else if (this.giftType === 'lg') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/lg.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/lg.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '20px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
 
           } else if (this.giftType === 'xl') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/xl.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/xl.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '25px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
@@ -259,7 +261,7 @@ $(function() {
 
           if (this.giftType === 'xs-2') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/cross.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/cross.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '30px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
@@ -267,28 +269,28 @@ $(function() {
 
           } else if (this.giftType === 'sm') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/sm.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/sm.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '30px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
 
           } else if (this.giftType === 'md') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/md.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/md.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '15px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
 
           } else if (this.giftType === 'lg') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/lg.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/lg.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '20px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
 
           } else if (this.giftType === 'xl') {
 
-            this.activeTile.style.backgroundImage = 'url("/assets/xl.png")';
+            this.activeTile.style.backgroundImage = 'url("assets/xl.png")';
             this.activeTile.style.backgroundPosition = 'center';
             this.activeTile.style.backgroundSize = '25px';
             this.activeTile.style.backgroundRepeat = 'no-repeat';
@@ -590,7 +592,7 @@ $(function() {
     let openingText = document.createElement('p');
     openingText.className = 'openingText';
 
-    openingText.innerHTML = 'You and your friend are out in the forest. Neither of you have had a good day today. You are both feeling a bit down. See what you can find to give to your friend. Perhaps you can cheer him up. After all, it might even help you feel better yourself.';
+    openingText.innerHTML = '<3 <br><br>You and your friend are out in the forest. Neither of you have had a good day today. You are both feeling a bit down. See what you can find to give to your friend. Perhaps you can cheer him up. After all, it might even help you feel better yourself.';
 
     let openingButton = document.createElement('button');
     openingButton.innerHTML = "Click to Start!";
@@ -1267,35 +1269,35 @@ $(function() {
       $("#gift-type-p1").html("Extra small<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p1").html('<img src="/assets/cross.png">');
+      $("#gift-img-p1").html('<img src="assets/cross.png">');
 
     } else if (player1.giftType === 'sm') {
       // GIFT TYPE
       $("#gift-type-p1").html("Small<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p1").html('<img src="/assets/sm.png">');
+      $("#gift-img-p1").html('<img src="assets/sm.png">');
 
     } else if (player1.giftType === 'md') {
       // GIFT TYPE
       $("#gift-type-p1").html("Medium<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p1").html('<img src="/assets/md.png">');
+      $("#gift-img-p1").html('<img src="assets/md.png">');
 
     } else if (player1.giftType === 'lg') {
       // GIFT TYPE
       $("#gift-type-p1").html("Large<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p1").html('<img src="/assets/lg.png">');
+      $("#gift-img-p1").html('<img src="assets/lg.png">');
 
     } else if (player1.giftType === 'xl') {
       // GIFT TYPE
       $("#gift-type-p1").html("Extra large<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p1").html('<img src="/assets/xl.png">');
+      $("#gift-img-p1").html('<img src="assets/xl.png">');
 
     }
 
@@ -1305,35 +1307,35 @@ $(function() {
       $("#gift-type-p2").html("Extra small<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p2").html('<img src="/assets/cross.png">');
+      $("#gift-img-p2").html('<img src="assets/cross.png">');
 
     } else if (player2.giftType === 'sm') {
       // GIFT TYPE
       $("#gift-type-p2").html("Small<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p2").html('<img src="/assets/sm.png">');
+      $("#gift-img-p2").html('<img src="assets/sm.png">');
 
     } else if (player2.giftType === 'md') {
       // GIFT TYPE
       $("#gift-type-p2").html("Medium<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p2").html('<img src="/assets/md.png">');
+      $("#gift-img-p2").html('<img src="assets/md.png">');
 
     } else if (player2.giftType === 'lg') {
       // GIFT TYPE
       $("#gift-type-p2").html("Large<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p2").html('<img src="/assets/lg.png">');
+      $("#gift-img-p2").html('<img src="assets/lg.png">');
 
     } else if (player2.giftType === 'xl') {
       // GIFT TYPE
       $("#gift-type-p2").html("Extra large<sup> gift</sup>");
 
       // GIFT IMAGE
-      $("#gift-img-p2").html('<img src="/assets/xl.png">');
+      $("#gift-img-p2").html('<img src="assets/xl.png">');
 
     }
 
