@@ -97,6 +97,25 @@
 		"oAP": "/build/node_modules",
 		"oF": 0
 		},
+	"/Notes to Self.md": {
+		"cB": 0,
+		"cS": 0,
+		"eF": 1,
+		"eL": 1,
+		"ema": 1,
+		"eSQ": 1,
+		"ft": 4096,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/Notes to Self.html",
+		"oF": 0,
+		"oFM": 0,
+		"oS": 0,
+		"pHT": 0,
+		"pME": 1,
+		"rFN": 0,
+		"uCM": 0
+		},
 	"/package-lock.json": {
 		"ft": 524288,
 		"oA": 1,
