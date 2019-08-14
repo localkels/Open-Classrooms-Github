@@ -23,6 +23,11 @@ class Board extends React.Component {
 
   handleClick(i) {
     const squares = this.state.squares.slice();
+
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    
     // This "?" operator is a conditional operator. https://javascript.info/ifelse#conditional-operator
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
