@@ -18,6 +18,10 @@ class App extends React.Component {
 
   render () {
     let items = this.state.items;
+    if (this.state.filter) {
+      items = items.filter( item => )
+
+    }
     return (
       <div>
         {items.map( item => <h4 key={item.name}>{item.name}</h4>)}

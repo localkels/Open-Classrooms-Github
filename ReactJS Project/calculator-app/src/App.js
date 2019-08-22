@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      buttonSymbols: [1,2,3,4,5,6,7,8,9,0,"+","–","X","÷"]
+
+    }
+  }
+
+  render(){
+    let buttonSymbols = this.state.buttonSymbols;
+    return (
+      this.state.buttonSymbols.map((i) => {
+        return <button id={buttonSymbols[i]} key={i}>{buttonSymbols[i]}</button>
+      })
+
+      // <button id={buttonSymbols[1]}>{buttonSymbols[1]}</button>
+    )
+  }
+}
+
+class ButtonBlock extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+
+
+  render(){
+    return (<div>Hi</div>)
+  }
 }
 
 export default App;
