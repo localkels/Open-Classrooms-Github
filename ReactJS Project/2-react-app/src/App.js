@@ -1,26 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from 'react-dom';
+// import PropTypes from 'prop-types'; // ES6
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// Class Component - which has state
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {items: []}
+
+  }
+  UNSAFE_componentWillMount() {
+    fetch( 'https://swapi.co/api/people/?format=json' )
+    .then( response => response.json() )
+    .then( ({results: items}) => this.setState({items}) )
+
+  }
+
+  render () {
+    let items = this.state.items;
+    return (
+      <div>
+        {items.map( item => <h4 key={item.name}>{item.name}</h4>)}
+      </div>
+    )
+  }
+  }
 
 export default App;
+
+// const Button = (props) => <button>{props.children}</button>
+//
+// class Heart extends React.Component {
+//   render () {
+//     return <span>&hearts;</span>
+//
+//   }
+// }
+
+// const Widget = (props) => <input type="text" onChange={props.update}/>
+
+// App.defaultProps = {
+//   txt: "this is the default text"
+// }
+
+// Stateless function component
+// const App = () => {return <h1>Hoi Stateless!</h1>}
