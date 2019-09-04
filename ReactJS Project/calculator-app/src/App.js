@@ -1,7 +1,10 @@
+//  NEXT UP: working on the calculating part
+// Get the VERY BASICS working first, then clean up later
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Button from './Button';
+// import Button from './Button';
 
 
 function NewButton(props) {
@@ -31,15 +34,19 @@ class ButtonList extends React.Component {
 }
 
 class App extends React.Component {
-  constructor() {
-    super();
-    // this.calculate = this.calculate.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   // this.calculate = this.calculate.bind(this);
+  // }
 
   calculate = (e) => {
-    console.log(e.target.value);
-    //  NEXT UP: working on the calculating part
-    // Get the VERY BASICS working first, then clean up later
+    let clickedValue = e.target.value;
+    let onscreenValue;
+    console.log(clickedValue);
+
+
+    // if it's a number (check data type) - concatenate it to onscreenValue.
+    // if it's a string - check if it's plus, minus, etc.
   }
 
   render() {
